@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nightform &mdash; vebra</title>
+    <meta name="description" content="Nightform, the fifth vebra album: eleven songs cut live to tape over nine nights in Brooklyn.">
+    <meta name="keywords" content="musician, band, dj, festival, record label, music template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+
+    <!-- Favicon -->
+    <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;display=swap">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../assets/css/vendor/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../assets/icon-fonts/remixicon/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <!-- Motion is opt-in: without JS (or with reduced motion) content renders as-is -->
+<script src="../assets/js/no-fouc.js"></script>
+</head>
+
+<body class="theme-chartreuse has-bottom-player">
+    <!-- Outline filter — traces the silhouette of every outlined ("ghost")
+         text on the page. Keep it: the display faces are built from
+         overlapping sub-paths, which a plain text-stroke would expose. -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <filter id="vebra-outline" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceGraphic" result="solid">
+                <feFuncA type="linear" slope="255"/>
+            </feComponentTransfer>
+            <feMorphology in="solid" operator="erode" radius="1" result="core"/>
+            <feComposite in="solid" in2="core" operator="out" result="rim"/>
+            <feComposite in="rim" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </svg>
+
+
+    <!-- PRELOADER
+    ============================================= -->
+    <div class="preloader">
+        <div class="preloader__curtain">
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+        </div>
+        <div class="preloader__inner">
+            <div class="preloader__word">vebra</div>
+            <p class="preloader__tagline">Sound in its purest form</p>
+            <div class="preloader__bar"><span class="preloader__bar-fill"></span></div>
+        </div>
+        <div class="preloader__count">00</div>
+    </div>
+
+    <!-- Decorative layers -->
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span class="cursor-ring__label"></span></div>
+
+
+    <!-- HEADER
+    ============================================= -->
+    <header class="site-header site-header--float">
+        <div class="site-header__inner">
+            <a href="../index.php" class="site-logo" aria-label="vebra — home">
+                <span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+            <ul class="nav__list">
+                <li class="nav__item has-children">
+                    <a href="../index.php" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Home">Home</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                </li>
+                <li class="nav__item has-children is-active">
+                    <a href="discography.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Discography">Discography</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="discography.html">Albums</a></li>
+                        <li class="is-active"><a href="single-album.html">Single Album</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="shop-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Shop">Shop</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="shop-page.html">All Products</a></li>
+                        <li><a href="single-product.html">Single Product</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="news-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="News">News</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="news-page.html">All News</a></li>
+                        <li><a href="single-news.html">Single News</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <button type="button" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Pages">Pages</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="nav__sub">
+                        <li class="has-children">
+                            <a href="events.html">Events<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="events.html">All Events</a></li>
+                                <li><a href="single-event.html">Single Event</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li class="has-children">
+                            <a href="video-gallery.html">Videos<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="video-gallery.html">Video Gallery</a></li>
+                                <li><a href="single-video.html">Single Video</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="shop-page.html" class="cart-button" aria-label="Cart, 2 items">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-button__count">2</span>
+                </a>
+                <button type="button" class="menu-trigger" data-magnetic="0.25" aria-expanded="false" aria-controls="overlay-menu">
+                    <span class="menu-trigger__label btn__label">Menu</span>
+                    <span class="menu-trigger__bars" aria-hidden="true"><span></span><span></span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- OVERLAY MENU
+    ============================================= -->
+    <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+
+        <div class="overlay-menu__inner">
+            <nav class="overlay-nav" aria-label="Fullscreen">
+                <div class="overlay-nav__item">
+                    <a href="../index.php" class="overlay-nav__link">
+                        <span class="overlay-nav__index">01</span> Home
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Home links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="../index.php">Home 1</a></li>
+                            <li><a href="demo-2.html">Home 2</a></li>
+                            <li><a href="demo-3.html">Home 3</a></li>
+                            <li><a href="demo-4.html">Home 4</a></li>
+                            <li><a href="demo-5.html">Home 5</a></li>
+                            <li><a href="demo-6.html">Home 6</a></li>
+                            <li><a href="demo-7.html">Home 7</a></li>
+                            <li><a href="demo-8.html">Home 8</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="discography.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">02</span> Discography
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Discography links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="discography.html">Albums</a></li>
+                            <li class="is-active"><a href="single-album.html">Single Album</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="shop-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">03</span> Shop
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Shop links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="shop-page.html">All Products</a></li>
+                            <li><a href="single-product.html">Single Product</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="news-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">04</span> News
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle News links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="news-page.html">All News</a></li>
+                            <li><a href="single-news.html">Single News</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <button type="button" class="overlay-nav__link overlay-nav__link--group">
+                        <span class="overlay-nav__index">05</span> Pages
+                    </button>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Pages links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list overlay-nav__sub-list--grouped">
+                            <li class="overlay-nav__group">
+                                <a href="events.html">Events</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="events.html">All Events</a></li>
+                                    <li><a href="single-event.html">Single Event</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li class="overlay-nav__group">
+                                <a href="video-gallery.html">Videos</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="video-gallery.html">Video Gallery</a></li>
+                                    <li><a href="single-video.html">Single Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+            </nav>
+
+            <aside class="overlay-aside" aria-label="Contact details">
+                <div class="overlay-aside__group">
+                    <span class="label">Bookings</span>
+                    <a href="mailto:hello@vebra.com" class="overlay-aside__value">hello@vebra.com</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Management</span>
+                    <a href="tel:+15550142200" class="overlay-aside__value">+1 (555) 014 2200</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Studio</span>
+                    <p class="footer-text">218 Rivington Street<br>Brooklyn, NY 11206</p>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Follow</span>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+                <div class="overlay-aside__gallery">
+                    <img src="../assets/images/gallery-1.jpg" alt="Live show">
+                    <img src="../assets/images/gallery-2.jpg" alt="Backstage">
+                    <img src="../assets/images/gallery-3.jpg" alt="Studio session">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+
+<main id="main">
+
+    <!-- SINGLE ALBUM
+    ============================================= -->
+    <section class="section section--below-header section--glow">
+        <div class="container-vebra">
+            <div class="stack stack-7">
+                <div class="stack stack-6">
+                    <ul class="breadcrumb-vebra" data-reveal="up">
+                        <li><a href="../index.php">Home</a></li>
+                        <li class="breadcrumb-vebra__sep">/</li>
+                        <li><a href="discography.html">Discography</a></li>
+                        <li class="breadcrumb-vebra__sep">/</li>
+                        <li aria-current="page">Nightform</li>
+                    </ul>
+
+                    <div class="album-hero">
+                        <div class="album-hero__cover" data-reveal="mask" data-tilt="8" data-cursor="Play">
+                            <div class="album-hero__vinyl" aria-hidden="true"></div>
+                            <img src="../assets/images/album-cover-1.jpg" alt="Nightform album artwork">
+                        </div>
+
+                        <div class="album-hero__body">
+                            <span class="section-label">Album &middot; Out now</span>
+                            <h1 class="album-hero__title" data-split="chars" data-split-hero>Nightform</h1>
+                            <p class="section-head__text">
+                                Our fifth record, cut live to tape over nine nights on Rivington Street.
+                                Eleven songs about staying up too late in a city that never quite goes quiet.
+                            </p>
+
+                            <div class="album-hero__platforms">
+                                <a href="#" class="pill pill--solid"><i class="ri-spotify-fill"></i> Spotify</a>
+                                <a href="#" class="pill"><i class="ri-apple-fill"></i> Apple Music</a>
+                                <a href="#" class="pill"><i class="ri-album-fill"></i> Bandcamp</a>
+                            </div>
+
+                            <a href="shop-page.html" class="btn btn--solid btn--lg" data-magnetic="0.3"><span class="btn__label">Buy the vinyl <i class="ri-arrow-right-up-line"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-layout">
+                    <div class="stack stack-4" data-reveal="up">
+                        <h2 class="section-head__title" data-split="lines">A record made <em>after midnight</em></h2>
+                        <p class="section-head__text">
+                            Nightform started as a rule rather than a song: nothing gets recorded before eleven at
+                            night. We took over a second-floor room on Rivington Street, ran the drums up a stairwell,
+                            put a church organ through a modular rack, and cut every vocal in a single take before
+                            sunrise. What came back off the tape was rougher and warmer than anything we had made.
+                        </p>
+                        <p class="section-head__text">
+                            There are no click tracks on this album and almost no overdubs. If you hear a radiator on
+                            <em>Amber Room</em> or a chair moving on <em>Low Country</em>, that is the room joining in.
+                            Allen Ritter mixed the whole thing on one desk, at half speed, in eight days &mdash; and
+                            then we mastered it loud, because that is how it sounds in our heads.
+                        </p>
+                        <p class="section-head__text">
+                            Play it late, and play it whole. Side A and side B were sequenced to be heard in one
+                            sitting, and the last three minutes of <em>Sirens, Slowly</em> only really land if you
+                            got there the long way round.
+                        </p>
+                    </div>
+
+                    <aside class="sidebar" aria-label="Related information">
+                        <div class="sidebar__block">
+                            <h3 class="sidebar__title">Album info</h3>
+                            <div class="info-list">
+                                <div class="info-list__row"><span class="info-list__label">Released</span><span class="info-list__value">14 May 2026</span></div>
+                                <div class="info-list__row"><span class="info-list__label">Label</span><span class="info-list__value">Rivington Tapes</span></div>
+                                <div class="info-list__row"><span class="info-list__label">Genre</span><span class="info-list__value">Art rock &middot; Post-punk</span></div>
+                                <div class="info-list__row"><span class="info-list__label">Length</span><span class="info-list__value">48:26</span></div>
+                                <div class="info-list__row"><span class="info-list__label">Producer</span><span class="info-list__value">Allen Ritter</span></div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar__block">
+                            <h3 class="sidebar__title">More from vebra</h3>
+                            <div class="mini-list">
+                                <a href="single-album.html" class="mini-item">
+                                    <img src="../assets/images/album-2.jpg" alt="Static Bloom">
+                                    <div><h4>Static Bloom</h4><span>2024 &middot; Album</span></div>
+                                </a>
+                                <a href="single-album.html" class="mini-item">
+                                    <img src="../assets/images/album-3.jpg" alt="Rivington Tapes">
+                                    <div><h4>Rivington Tapes</h4><span>2023 &middot; EP</span></div>
+                                </a>
+                                <a href="single-album.html" class="mini-item">
+                                    <img src="../assets/images/album-5.jpg" alt="Halogen">
+                                    <div><h4>Halogen</h4><span>2021 &middot; Album</span></div>
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- MUSIC PLAYER
+    ============================================= -->
+    <section class="section player-section">
+        <div class="player-section__bg" aria-hidden="true">
+            <img data-amplitude-song-info="cover_art_url" src="../assets/images/album-cover-1.jpg" alt="">
+        </div>
+
+        <div class="container-vebra">
+            <div class="section-head">
+                <div>
+                    <span class="section-label">Music player</span>
+                    <h2 class="section-head__title" data-split="lines">Listen to <em>Nightform</em></h2>
+                </div>
+                <a href="#" class="link-arrow" data-magnetic="0.2">Buy on iTunes <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+
+            <div class="music-player" data-reveal="up">
+                <div class="player-now">
+                    <div class="player-cover">
+                        <div class="player-cover__vinyl" aria-hidden="true"></div>
+                        <img class="album-art" data-amplitude-song-info="cover_art_url" src="../assets/images/album-cover-1.jpg" alt="Album artwork">
+                    </div>
+                    <div class="player-now__meta">
+                        <span class="player-now__artist" data-amplitude-song-info="artist">vebra</span>
+                        <h3 class="player-now__title" data-amplitude-song-info="name">Nightform</h3>
+                    </div>
+                </div>
+
+                <div class="player-controls">
+                    <!-- Play list -->
+                    <div class="playlist" data-lenis-prevent>
+                        <div class="list-song amplitude-play-pause amplitude-song-container" data-amplitude-song-index="0" data-id="1" data-title="Nightform" data-artist="vebra" data-album="Nightform" data-cover="assets/images/album-cover-1.jpg" data-url="assets/musics/1.mp3">
+                            <span class="list-song__index">01</span>
+                            <span class="list-song__eq" aria-hidden="true"><span></span><span></span><span></span></span>
+                            <span class="list-song__title">Nightform<span class="list-song__artist">Nightform</span></span>
+                            <span class="list-song__duration">4:12</span>
+                        </div>
+                        <div class="list-song amplitude-play-pause amplitude-song-container" data-amplitude-song-index="1" data-id="2" data-title="Halogen Kids" data-artist="vebra" data-album="Nightform" data-cover="assets/images/album-cover-2.jpg" data-url="assets/musics/2.mp3">
+                            <span class="list-song__index">02</span>
+                            <span class="list-song__eq" aria-hidden="true"><span></span><span></span><span></span></span>
+                            <span class="list-song__title">Halogen Kids<span class="list-song__artist">Nightform</span></span>
+                            <span class="list-song__duration">3:38</span>
+                        </div>
+                        <div class="list-song amplitude-play-pause amplitude-song-container" data-amplitude-song-index="2" data-id="3" data-title="Amber Room" data-artist="vebra" data-album="Nightform" data-cover="assets/images/album-cover-1.jpg" data-url="assets/musics/3.mp3">
+                            <span class="list-song__index">03</span>
+                            <span class="list-song__eq" aria-hidden="true"><span></span><span></span><span></span></span>
+                            <span class="list-song__title">Amber Room<span class="list-song__artist">Nightform</span></span>
+                            <span class="list-song__duration">5:07</span>
+                        </div>
+                        <div class="list-song amplitude-play-pause amplitude-song-container" data-amplitude-song-index="3" data-id="4" data-title="Static Bloom" data-artist="vebra" data-album="Nightform" data-cover="assets/images/album-cover-2.jpg" data-url="assets/musics/4.mp3">
+                            <span class="list-song__index">04</span>
+                            <span class="list-song__eq" aria-hidden="true"><span></span><span></span><span></span></span>
+                            <span class="list-song__title">Static Bloom<span class="list-song__artist">Nightform</span></span>
+                            <span class="list-song__duration">3:55</span>
+                        </div>
+                        <div class="list-song amplitude-play-pause amplitude-song-container" data-amplitude-song-index="4" data-id="5" data-title="Sirens, Slowly" data-artist="vebra" data-album="Nightform" data-cover="assets/images/album-cover-1.jpg" data-url="assets/musics/5.mp3">
+                            <span class="list-song__index">05</span>
+                            <span class="list-song__eq" aria-hidden="true"><span></span><span></span><span></span></span>
+                            <span class="list-song__title">Sirens, Slowly<span class="list-song__artist">Nightform</span></span>
+                            <span class="list-song__duration">6:21</span>
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <div class="player-progress">
+                        <span class="player-time" data-role="current-time">0:00</span>
+                        <input type="range" class="amplitude-song-slider player-range" data-role="progress" aria-label="Seek" value="0" min="0" max="100">
+                        <span class="player-time" data-role="duration">0:00</span>
+                    </div>
+
+                    <div class="player-buttons">
+                        <button type="button" class="player-btn amplitude-prev" aria-label="Previous track"><i class="ri-skip-back-fill"></i></button>
+                        <button type="button" class="player-btn player-btn--play amplitude-play-pause" aria-label="Play or pause">
+                            <i class="ri-play-fill icon-play"></i>
+                            <i class="ri-pause-fill icon-pause"></i>
+                        </button>
+                        <button type="button" class="player-btn amplitude-next" aria-label="Next track"><i class="ri-skip-forward-fill"></i></button>
+
+                        <div class="player-volume">
+                            <i class="ri-volume-down-line" aria-hidden="true"></i>
+                            <input type="range" class="amplitude-volume-slider player-range" data-role="volume" aria-label="Volume" value="70" min="0" max="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER
+    ============================================= -->
+    <footer class="site-footer">
+        <div class="site-footer__bg" aria-hidden="true">
+            <img src="../assets/images/footer-image.jpg" alt="">
+        </div>
+        <div class="site-footer__glow" aria-hidden="true"></div>
+
+        <div class="container-vebra">
+            <div class="footer-marquee marquee" data-velocity>
+                <div class="marquee__track">
+                    <span class="marquee__item">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                </div>
+            </div>
+
+            <div class="footer-cta">
+                <h2 class="footer-cta__title" data-split="lines">Let&rsquo;s make something <em>loud</em></h2>
+                <a href="mailto:hello@vebra.com" class="btn btn--solid btn--lg" data-magnetic="0.3"><span class="btn__label">hello@vebra.com <i class="ri-arrow-right-up-line"></i></span></a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <a href="../index.php" class="site-logo"><span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span></a>
+                    <p class="footer-text">A five-piece from Brooklyn making records that sound better loud. Booking and press enquiries welcome.</p>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Explore</h3>
+                    <div class="footer-links">
+                        <a href="discography.html">Discography</a>
+                        <a href="events.html">Events</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="video-gallery.html">Videos</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">More</h3>
+                    <div class="footer-links">
+                        <a href="shop-page.html">Shop</a>
+                        <a href="news-page.html">News</a>
+                        <a href="artists.html">Artists</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Newsletter</h3>
+                    <p class="footer-text">Tour dates and releases, no noise.</p>
+                    <form class="form-inline footer-newsletter" data-stub-form data-success-message="You're on the list — see you at the next show.">
+                        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+                        <button type="submit" aria-label="Subscribe"><i class="ri-arrow-right-line"></i></button>
+                    </form>
+                    <p class="form-message"></p>
+                </div>
+            </div>
+
+            <div class="footer-wordmark-wrap">
+                <a href="../index.php" class="footer-wordmark" aria-hidden="true" tabindex="-1">vebra</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 vebra Band — All rights reserved.</p>
+                <div class="footer-bottom__links">
+                    <a href="typography.html">Typography</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Licence</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+
+    <!-- STICKY BOTTOM PLAYER
+    ============================================= -->
+    <div class="bottom-player">
+        <div class="bottom-player__rail"><span class="bottom-player__rail-fill"></span></div>
+        <div class="bottom-player__inner">
+            <div class="bottom-player__track">
+                <div class="bottom-player__cover">
+                    <img data-amplitude-song-info="cover_art_url" src="../assets/images/album-cover-1.jpg" alt="">
+                </div>
+                <div class="bottom-player__meta">
+                    <span class="bottom-player__title" data-amplitude-song-info="name">Cold (feat. Future)</span>
+                    <span class="bottom-player__artist" data-amplitude-song-info="album">Hands All Over</span>
+                </div>
+            </div>
+
+            <div class="bottom-player__controls">
+                <button type="button" class="player-btn amplitude-prev" aria-label="Previous track"><i class="ri-skip-back-fill"></i></button>
+                <button type="button" class="player-btn player-btn--play amplitude-play-pause" aria-label="Play or pause">
+                    <i class="ri-play-fill icon-play"></i>
+                    <i class="ri-pause-fill icon-pause"></i>
+                </button>
+                <button type="button" class="player-btn player-btn--next amplitude-next" aria-label="Next track"><i class="ri-skip-forward-fill"></i></button>
+            </div>
+
+            <div class="bottom-player__side">
+                <span class="bottom-player__time"><span data-role="current-time">0:00</span> / <span data-role="duration">0:00</span></span>
+                <div class="player-volume">
+                    <i class="ri-volume-down-line" aria-hidden="true"></i>
+                    <input type="range" class="amplitude-volume-slider player-range" data-role="volume" aria-label="Volume" value="70" min="0" max="100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/vendor/gsap.min.js"></script>
+    <script src="../assets/js/vendor/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/vendor/SplitText.min.js"></script>
+    <script src="../assets/js/vendor/lenis.min.js"></script>
+    <script src="../assets/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../assets/js/vendor/amplitude.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

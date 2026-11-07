@@ -1,0 +1,170 @@
+<?php
+require_once __DIR__ . '/../includes/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$error = '';
+$usernameVal = '';
+$nameVal = '';
+$addressVal = '';
+$phoneVal = '';
+$emailVal = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usernameVal = trim($_POST['username'] ?? '');
+    $nameVal = trim($_POST['name'] ?? '');
+    $addressVal = trim($_POST['address'] ?? '');
+    $phoneVal = trim($_POST['phone'] ?? '');
+    $emailVal = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirm_password'] ?? '';
+
+    // Validation per Aptech project spec
+    if (empty($usernameVal) || empty($nameVal) || empty($addressVal) || empty($phoneVal) || empty($emailVal) || empty($password)) {
+        $error = 'All fields (Username, Full Name, Address, Phone, Email, Password) are required.';
+    } elseif (!filter_var($emailVal, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please provide a valid email address.';
+    } elseif (strlen($password) < 6) {
+        $error = 'Password must be at least 6 characters long.';
+    } elseif ($password !== $confirmPassword) {
+        $error = 'Passwords do not match.';
+    } else {
+        try {
+            // Check if email or username already taken
+            $checkStmt = $pdo->prepare("SELECT id FROM users WHERE email = ? OR username = ? LIMIT 1");
+            $checkStmt->execute([$emailVal, $usernameVal]);
+            if ($checkStmt->fetch()) {
+                $error = 'That email address or username is already registered. Please log in.';
+            } else {
+                $hashed = password_hash($password, PASSWORD_BCRYPT);
+                $insStmt = $pdo->prepare("INSERT INTO users (username, name, address, phone, email, password, role) VALUES (?, ?, ?, ?, ?, ?, 'user')");
+                $insStmt->execute([$usernameVal, $nameVal, $addressVal, $phoneVal, $emailVal, $hashed]);
+
+                header('Location: login.php?registered=1');
+                exit;
+            }
+        } catch (Exception $e) {
+            $error = 'An error occurred during registration. Please try again.';
+        }
+    }
+}
+
+$pageTitle = 'Join VEBRA — Register Account';
+$basePath = '../';
+$bodyClass = 'theme-magenta';
+$activePage = 'account';
+$activeSub = 'register';
+require_once __DIR__ . '/../includes/header.php';
+?>
+
+<main id="main">
+    <section class="page-caption" data-parallax-scope>
+        <div class="page-caption__bg" aria-hidden="true">
+            <img src="../assets/images/hero-1.jpg" alt="" data-parallax-speed="0.12">
+        </div>
+
+        <div class="container-vebra">
+            <div class="page-caption__inner" style="max-width: 560px; margin: 0 auto; text-align: center;">
+                <nav class="breadcrumb-vebra" aria-label="Breadcrumb" style="justify-content: center;">
+                    <a href="../index.php">Home</a>
+                    <span class="breadcrumb-vebra__sep">/</span>
+                    <span aria-current="page">Register</span>
+                </nav>
+
+                <h1 class="page-caption__title" data-split="chars" data-split-hero style="margin-bottom: 12px;">
+                    Create Account
+                    <span class="page-caption__ghost" aria-hidden="true">Join</span>
+                </h1>
+
+                <p class="page-caption__text" data-reveal="up" data-delay="0.2">
+                    Join the VEBRA community. Register to submit track reviews, rate releases, and manage your account.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 40px; padding-bottom: 80px;">
+        <div class="container-vebra">
+            <div style="max-width: 540px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 36px 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+
+                <?php if ($error): ?>
+                    <div style="background: rgba(255, 60, 60, 0.15); border: 1px solid rgba(255, 60, 60, 0.5); padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; color: #fff; font-size: 0.95rem;">
+                        <i class="ri-error-warning-fill" style="color:#ff5c5c; margin-right:6px;"></i> <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form method="POST" action="" class="contact-form">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="text" name="username" id="reg-username" class="field__control" placeholder=" " value="<?= htmlspecialchars($usernameVal) ?>" required>
+                                <label for="reg-username" class="field__label">Username</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="text" name="name" id="reg-name" class="field__control" placeholder=" " value="<?= htmlspecialchars($nameVal) ?>" required>
+                                <label for="reg-name" class="field__label">Full Name</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field" style="margin-top: 16px;">
+                        <input type="email" name="email" id="reg-email" class="field__control" placeholder=" " value="<?= htmlspecialchars($emailVal) ?>" required>
+                        <label for="reg-email" class="field__label">Email Address</label>
+                        <span class="field__line" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="row g-3" style="margin-top: 4px;">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="text" name="phone" id="reg-phone" class="field__control" placeholder=" " value="<?= htmlspecialchars($phoneVal) ?>" required>
+                                <label for="reg-phone" class="field__label">Phone Number</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="text" name="address" id="reg-address" class="field__control" placeholder=" " value="<?= htmlspecialchars($addressVal) ?>" required>
+                                <label for="reg-address" class="field__label">Address / City</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3" style="margin-top: 4px; margin-bottom: 24px;">
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="password" name="password" id="reg-password" class="field__control" placeholder=" " required minlength="6">
+                                <label for="reg-password" class="field__label">Password (min 6 chars)</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="field">
+                                <input type="password" name="confirm_password" id="reg-confirm-password" class="field__control" placeholder=" " required minlength="6">
+                                <label for="reg-confirm-password" class="field__label">Confirm Password</label>
+                                <span class="field__line" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn--solid btn--block" data-magnetic="0.2" style="width: 100%; margin-bottom: 20px;">
+                        <span class="btn__label">Complete Registration <i class="ri-user-add-line"></i></span>
+                    </button>
+
+                    <div style="text-align: center; color: var(--ink-40); font-size: 0.9rem;">
+                        Already have an account? <a href="login.php" style="color: var(--accent); font-weight: 600; text-decoration: none;">Log in here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php
+require_once __DIR__ . '/../includes/footer.php';
+?>

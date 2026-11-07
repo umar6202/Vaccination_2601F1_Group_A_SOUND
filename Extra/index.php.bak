@@ -1,0 +1,665 @@
+<?php
+require_once __DIR__ . '/includes/db.php';
+
+$songs = [];
+$videos = [];
+$artists = [];
+$playerSongs = [];
+
+/* Latest five approved songs */
+$songResult = mysqli_query($conn, "
+    SELECT s.*, a.name AS artist_name, g.name AS genre_name
+    FROM songs s
+    LEFT JOIN artists a ON a.id = s.artist_id
+    LEFT JOIN genres g ON g.id = s.genre_id
+    WHERE s.status = 'approved'
+    ORDER BY s.created_at DESC, s.id DESC
+    LIMIT 5
+");
+
+if ($songResult) {
+    while ($row = mysqli_fetch_assoc($songResult)) {
+        $songs[] = $row;
+    }
+}
+
+/* Latest five approved videos */
+$videoResult = mysqli_query($conn, "
+    SELECT v.*, a.name AS artist_name, g.name AS genre_name
+    FROM videos v
+    LEFT JOIN artists a ON a.id = v.artist_id
+    LEFT JOIN genres g ON g.id = v.genre_id
+    WHERE v.status = 'approved'
+    ORDER BY v.created_at DESC, v.id DESC
+    LIMIT 5
+");
+
+if ($videoResult) {
+    while ($row = mysqli_fetch_assoc($videoResult)) {
+        $videos[] = $row;
+    }
+}
+
+/* Three tracks for the homepage player */
+$playerResult = mysqli_query($conn, "
+    SELECT s.*, a.name AS artist_name, g.name AS genre_name
+    FROM songs s
+    LEFT JOIN artists a ON a.id = s.artist_id
+    LEFT JOIN genres g ON g.id = s.genre_id
+    WHERE s.status = 'approved'
+    ORDER BY s.created_at DESC, s.id DESC
+    LIMIT 3
+");
+
+if ($playerResult) {
+    while ($row = mysqli_fetch_assoc($playerResult)) {
+        $playerSongs[] = $row;
+    }
+}
+
+/* Featured artists: use the existing artists table */
+$artistResult = mysqli_query($conn, "
+    SELECT a.*, COUNT(s.id) AS release_count
+    FROM artists a
+    LEFT JOIN songs s
+        ON s.artist_id = a.id AND s.status = 'approved'
+    GROUP BY a.id
+    ORDER BY release_count DESC, a.id DESC
+    LIMIT 6
+");
+
+if ($artistResult) {
+    while ($row = mysqli_fetch_assoc($artistResult)) {
+        $artists[] = $row;
+    }
+}
+
+/* Escape helper */
+if (!function_exists('vebra_escape')) {
+    function vebra_escape($value): string {
+        return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+    }
+}
+
+/* Resolve optional image/audio fields without assuming every field exists */
+function vebra_field(array $row, array $keys, string $fallback = ''): string {
+    foreach ($keys as $key) {
+        if (isset($row[$key]) && trim((string)$row[$key]) !== '') {
+            return trim((string)$row[$key]);
+        }
+    }
+    return $fallback;
+}
+
+function vebra_image_path(string $path, string $fallback): string {
+    $path = trim($path);
+    if ($path === '') {
+        return $fallback;
+    }
+
+    /* Allow remote URLs and local project-relative paths */
+    if (preg_match('~^(https?://|/)~i', $path)) {
+        return $path;
+    }
+
+    return $path;
+}
+
+$pageTitle = 'VEBRA — Music, Artists & Releases';
+$activePage = 'home';
+$activeSub = '';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+    <main id="main">
+
+        <!-- HERO: original Home 6 visual structure -->
+        <section class="hero hero-6">
+            <div class="hero__bg" aria-hidden="true">
+                <img src="assets/images/hero-8.jpg" alt="VEBRA live visual hero">
+            </div>
+
+            <div class="hero__inner">
+                <div class="hero-6__grid">
+                    <div>
+                        <p class="hero__label" data-reveal="up">VEBRA — music without limits</p>
+                        <h1 class="hero__title hero-6__title" data-split="lines" data-split-hero>
+                            Louder than <em>memory</em>
+                        </h1>
+                    </div>
+                    <div class="hero-6__side" data-reveal="up" data-delay="0.35">
+                        <p>Discover new sounds, explore artists and find the next track that stays with you.</p>
+                        <div class="hero__actions mt-0">
+                            <a href="#featured-player" class="btn btn--solid" data-magnetic="0.3">
+                                <span class="btn__label">Listen now <i class="ri-play-fill"></i></span>
+                            </a>
+                            <a href="events.php" class="btn" data-magnetic="0.3">
+                                <span class="btn__label">Explore events</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero__rail">
+                <span class="scroll-cue">Scroll to discover</span>
+                <div class="hero__rail-socials">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+                    <a href="https://youtube.com/" target="_blank" rel="noopener">YouTube</a>
+                    <a href="https://spotify.com/" target="_blank" rel="noopener">Spotify</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED PLAYER -->
+        <?php if (!empty($playerSongs)): ?>
+        <section class="section vebra-player-section" id="featured-player">
+            <div class="container-vebra">
+                <div class="section-head" data-reveal="up">
+                    <div>
+                        <span class="section-label">The listening room</span>
+                        <h2 class="section-head__title" data-split="lines">Press play. <em>Feel more.</em></h2>
+                    </div>
+                    <a href="discography.php" class="link-arrow">
+                        All releases <i class="ri-arrow-right-up-line"></i>
+                    </a>
+                </div>
+
+                <div class="vebra-player-panel" data-reveal="up">
+                    <div class="vebra-player-art">
+                        <img id="vebra-player-cover"
+                            src="<?= vebra_escape(vebra_image_path(
+                                vebra_field($playerSongs[0], ['artwork', 'cover_image', 'cover']),
+                                'assets/images/album-1.jpg'
+                            )) ?>"
+                            alt="Featured track artwork">
+                        <span class="vebra-player-status">FEATURED TRACK</span>
+                    </div>
+
+                    <div class="vebra-player-content">
+                        <div class="vebra-player-now">
+                            <span class="section-label">Selected release</span>
+                            <h3 id="vebra-player-title"><?= vebra_escape($playerSongs[0]['title'] ?? 'Untitled') ?></h3>
+                            <p id="vebra-player-artist"><?= vebra_escape($playerSongs[0]['artist_name'] ?? 'Unknown artist') ?></p>
+                        </div>
+
+                        <!-- Uses the existing .music-player / .list-song hooks -->
+                        <div class="music-player vebra-player-list">
+                            <?php foreach ($playerSongs as $index => $song):
+                                $audio = vebra_field($song, ['audio_path', 'file_path', 'audio', 'file']);
+                                $cover = vebra_image_path(
+                                    vebra_field($song, ['artwork', 'cover_image', 'cover']),
+                                    'assets/images/album-1.jpg'
+                                );
+                                $title = (string)($song['title'] ?? 'Untitled');
+                                $artist = (string)($song['artist_name'] ?? 'Unknown artist');
+                            ?>
+                            <button type="button"
+                                class="list-song vebra-player-song<?= $index === 0 ? ' is-active' : '' ?>"
+                                data-title="<?= vebra_escape($title) ?>"
+                                data-artist="<?= vebra_escape($artist) ?>"
+                                data-album="<?= vebra_escape($song['album'] ?? '') ?>"
+                                data-url="<?= vebra_escape($audio) ?>"
+                                data-cover="<?= vebra_escape($cover) ?>">
+                                <span class="vebra-song-number"><?= str_pad((string)($index + 1), 2, '0', STR_PAD_LEFT) ?></span>
+                                <span class="vebra-song-info">
+                                    <strong><?= vebra_escape($title) ?></strong>
+                                    <small><?= vebra_escape($artist) ?></small>
+                                </span>
+                                <span class="vebra-song-play" aria-hidden="true"><i class="ri-play-fill"></i></span>
+                                <span class="list-song__duration"></span>
+                            </button>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <p class="vebra-player-note">Choose a track from the list to start listening.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <!-- LATEST RELEASES: approved songs -->
+        <section class="section section--alt discography-1" data-slider-scope>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Fresh from the studio</span>
+                        <h2 class="section-head__title" data-split="lines">Latest <em>releases</em></h2>
+                    </div>
+                    <a href="discography.php" class="link-arrow">
+                        All songs <i class="ri-arrow-right-up-line"></i>
+                    </a>
+                </div>
+
+                <div class="swiper swiper--clip" data-slider="disco">
+                    <div class="swiper-wrapper">
+                        <?php if ($songs): ?>
+                            <?php foreach ($songs as $song):
+                                $id = (int)$song['id'];
+                                $title = (string)($song['title'] ?? 'Untitled');
+                                $artist = (string)($song['artist_name'] ?? 'Unknown artist');
+                                $artwork = vebra_image_path(
+                                    vebra_field($song, ['artwork', 'cover_image', 'cover']),
+                                    'assets/images/album-1.jpg'
+                                );
+                                $year = (int)($song['release_year'] ?? 0);
+                            ?>
+                            <div class="swiper-slide">
+                                <a href="track.php?id=<?= $id ?>" class="album-card" data-cursor="Listen">
+                                    <div class="album-card__cover">
+                                        <img src="<?= vebra_escape($artwork) ?>"
+                                            alt="<?= vebra_escape($title) ?> artwork" loading="lazy">
+                                        <span class="btn-circle btn-circle--solid album-card__play">
+                                            <i class="ri-play-fill"></i>
+                                        </span>
+                                    </div>
+                                    <div class="album-card__body">
+                                        <div>
+                                            <h3 class="album-card__title"><?= vebra_escape($title) ?></h3>
+                                            <span class="album-card__meta"><?= vebra_escape($artist) ?></span>
+                                        </div>
+                                        <span class="album-card__year"><?= $year ?: '—' ?></span>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="swiper-slide">
+                                <div class="album-card">
+                                    <div class="album-card__cover">
+                                        <img src="assets/images/album-1.jpg" alt="VEBRA releases">
+                                    </div>
+                                    <div class="album-card__body">
+                                        <h3 class="album-card__title">Releases coming soon</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="slider-toolbar">
+                    <div class="swiper-pagination pagination-lines js-slider-pagination"></div>
+                    <div class="slider-nav">
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-prev" aria-label="Previous releases"><i class="ri-arrow-left-line"></i></button>
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-next" aria-label="Next releases"><i class="ri-arrow-right-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED ARTISTS -->
+        <section class="section vebra-artists-section" data-slider-scope>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Meet the creators</span>
+                        <h2 class="section-head__title" data-split="lines">Artists to <em>know</em></h2>
+                    </div>
+                    <a href="artists.php" class="link-arrow">All artists <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+
+                <div class="swiper swiper--clip" data-slider="members">
+                    <div class="swiper-wrapper">
+                        <?php if ($artists): ?>
+                            <?php foreach ($artists as $artist):
+                                $artistId = (int)$artist['id'];
+                                $artistName = (string)($artist['name'] ?? 'Artist');
+                                $artistImage = vebra_image_path(
+                                    vebra_field($artist, ['image', 'photo', 'profile_image', 'artist_image']),
+                                    'assets/images/team-1.jpg'
+                                );
+                            ?>
+                            <div class="swiper-slide">
+                                <a href="single-artist.php?id=<?= $artistId ?>" class="vebra-artist-card" data-cursor="Explore">
+                                    <div class="vebra-artist-image">
+                                        <img src="<?= vebra_escape($artistImage) ?>"
+                                            alt="<?= vebra_escape($artistName) ?>" loading="lazy">
+                                    </div>
+                                    <div class="vebra-artist-info">
+                                        <h3><?= vebra_escape($artistName) ?></h3>
+                                        <span><?= (int)($artist['release_count'] ?? 0) ?> approved releases</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="swiper-slide">
+                                <p>Artists will appear here when profiles are added.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="slider-toolbar">
+                    <div class="swiper-pagination pagination-lines js-slider-pagination"></div>
+                    <div class="slider-nav">
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-prev" aria-label="Previous artists"><i class="ri-arrow-left-line"></i></button>
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-next" aria-label="Next artists"><i class="ri-arrow-right-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED VIDEO + LATEST VIDEOS -->
+        <section class="section section--alt" data-slider-scope>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Watch the latest</span>
+                        <h2 class="section-head__title" data-split="lines">Sound meets <em>vision</em></h2>
+                    </div>
+                    <a href="video-gallery.php" class="link-arrow">All videos <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+
+                <?php if ($videos):
+                    $featuredVideo = $videos[0];
+                    $featuredVideoTitle = (string)($featuredVideo['title'] ?? 'Featured video');
+                    $featuredVideoArtist = (string)($featuredVideo['artist_name'] ?? 'VEBRA artist');
+                    $featuredThumb = vebra_image_path(
+                        vebra_field($featuredVideo, ['thumbnail', 'artwork', 'cover_image']),
+                        'assets/images/video-cover-1.jpg'
+                    );
+                    $featuredUrl = vebra_field($featuredVideo, ['video_url', 'video_path']);
+                    if ($featuredUrl === '') {
+                        $featuredUrl = 'video.php?id=' . (int)$featuredVideo['id'];
+                    }
+                ?>
+                <a href="<?= vebra_escape($featuredUrl) ?>" class="vebra-featured-video"
+                    data-lightbox="<?= !empty($featuredVideo['video_url']) || !empty($featuredVideo['video_path']) ? 'video' : 'none' ?>"
+                    data-src="<?= vebra_escape($featuredUrl) ?>" data-cursor="Play" data-reveal="up">
+                    <img src="<?= vebra_escape($featuredThumb) ?>" alt="<?= vebra_escape($featuredVideoTitle) ?>" loading="lazy">
+                    <span class="vebra-featured-video-shade"></span>
+                    <span class="vebra-featured-video-play"><i class="ri-play-fill"></i></span>
+                    <span class="vebra-featured-video-copy">
+                        <span class="section-label">Featured release</span>
+                        <strong><?= vebra_escape($featuredVideoTitle) ?></strong>
+                        <span><?= vebra_escape($featuredVideoArtist) ?></span>
+                    </span>
+                </a>
+                <?php endif; ?>
+
+                <div class="section-head vebra-video-list-heading" style="margin-top: 3rem;">
+                    <div>
+                        <span class="section-label">The video collection</span>
+                        <h3 class="section-head__title">Latest <em>videos</em></h3>
+                    </div>
+                </div>
+
+                <div class="swiper swiper--clip" data-slider="gallery">
+                    <div class="swiper-wrapper">
+                        <?php if ($videos): ?>
+                            <?php foreach ($videos as $video):
+                                $videoId = (int)$video['id'];
+                                $videoTitle = (string)($video['title'] ?? 'Untitled video');
+                                $videoArtist = (string)($video['artist_name'] ?? 'Unknown artist');
+                                $thumb = vebra_image_path(
+                                    vebra_field($video, ['thumbnail', 'artwork', 'cover_image']),
+                                    'assets/images/video-cover-1.jpg'
+                                );
+                                $url = vebra_field($video, ['video_url', 'video_path']);
+                                if ($url === '') {
+                                    $url = 'video.php?id=' . $videoId;
+                                }
+                            ?>
+                            <div class="swiper-slide">
+                                <a href="<?= vebra_escape($url) ?>" class="video-card"
+                                    data-lightbox="<?= !empty($video['video_url']) || !empty($video['video_path']) ? 'video' : 'none' ?>"
+                                    data-src="<?= vebra_escape($url) ?>"
+                                    data-caption="<?= vebra_escape($videoTitle . ' — ' . $videoArtist) ?>"
+                                    data-cursor="Play">
+                                    <img src="<?= vebra_escape($thumb) ?>" alt="<?= vebra_escape($videoTitle) ?>" loading="lazy">
+                                    <span class="btn-play video-card__play"><i class="ri-play-fill"></i></span>
+                                    <span class="video-card__body">
+                                        <span>
+                                            <span class="video-card__meta"><?= vebra_escape($videoArtist) ?></span>
+                                            <span class="video-card__title d-block"><?= vebra_escape($videoTitle) ?></span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="swiper-slide">
+                                <p>Approved music videos will appear here.</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="slider-toolbar">
+                    <div class="swiper-pagination pagination-lines js-slider-pagination"></div>
+                    <div class="slider-nav">
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-prev" aria-label="Previous videos"><i class="ri-arrow-left-line"></i></button>
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-next" aria-label="Next videos"><i class="ri-arrow-right-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- UPCOMING GIGS -->
+        <section class="section gigs" data-preview-scope>
+            <div class="gigs__bg" aria-hidden="true">
+                <img src="assets/images/gigs-bg.png" alt="">
+            </div>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Upcoming gigs</span>
+                        <h2 class="section-head__title" data-split="lines">Meet us <em>live</em></h2>
+                    </div>
+                    <div class="stack stack-3">
+                        <p class="section-head__text">Find the next show and experience the music live.</p>
+                        <a href="events.php" class="link-arrow">View all gigs <i class="ri-arrow-right-up-line"></i></a>
+                    </div>
+                </div>
+
+                <div class="gigs__list">
+                    <div class="gig-row" data-reveal="up" data-preview-src="assets/images/gallery-1.jpg">
+                        <div class="gig-row__date"><span class="gig-row__day">14</span><span class="gig-row__month"><strong>May</strong>2026</span></div>
+                        <div class="gig-row__venue"><h3 class="gig-row__city">London</h3><span class="gig-row__place"><i class="ri-map-pin-line"></i> Eventim Apollo</span></div>
+                        <span class="gig-row__time"><i class="ri-time-line"></i> 21:00</span>
+                        <div class="gig-row__action"><a href="single-event.php" class="btn btn--sm"><span class="btn__label">Event details</span></a></div>
+                    </div>
+                    <div class="gig-row" data-reveal="up" data-preview-src="assets/images/gallery-2.jpg">
+                        <div class="gig-row__date"><span class="gig-row__day">25</span><span class="gig-row__month"><strong>May</strong>2026</span></div>
+                        <div class="gig-row__venue"><h3 class="gig-row__city">Amsterdam</h3><span class="gig-row__place"><i class="ri-map-pin-line"></i> AFAS Live</span></div>
+                        <span class="gig-row__time"><i class="ri-time-line"></i> 19:30</span>
+                        <div class="gig-row__action"><a href="single-event.php" class="btn btn--sm"><span class="btn__label">Event details</span></a></div>
+                    </div>
+                    <div class="gig-row gig-row--sold" data-reveal="up" data-preview-src="assets/images/gallery-3.jpg">
+                        <div class="gig-row__date"><span class="gig-row__day">02</span><span class="gig-row__month"><strong>June</strong>2026</span></div>
+                        <div class="gig-row__venue"><h3 class="gig-row__city">Wien</h3><span class="gig-row__place"><i class="ri-map-pin-line"></i> Wiener Stadthalle</span></div>
+                        <span class="gig-row__time"><i class="ri-time-line"></i> 20:00</span>
+                        <div class="gig-row__action"><span class="gig-row__sold">Sold out</span></div>
+                    </div>
+                    <div class="gig-row" data-reveal="up" data-preview-src="assets/images/gallery-4.jpg">
+                        <div class="gig-row__date"><span class="gig-row__day">10</span><span class="gig-row__month"><strong>June</strong>2026</span></div>
+                        <div class="gig-row__venue"><h3 class="gig-row__city">Cologne</h3><span class="gig-row__place"><i class="ri-map-pin-line"></i> Lanxess Arena</span></div>
+                        <span class="gig-row__time"><i class="ri-time-line"></i> 22:30</span>
+                        <div class="gig-row__action"><a href="single-event.php" class="btn btn--sm"><span class="btn__label">Event details</span></a></div>
+                    </div>
+                </div>
+                <div class="row-preview" aria-hidden="true"><img src="assets/images/gallery-1.jpg" alt=""></div>
+            </div>
+        </section>
+
+        <!-- PHOTO GALLERY -->
+        <section class="section photo-gallery-2" data-filter-scope>
+            <div class="container-vebra">
+                <div class="gallery-toolbar">
+                    <div>
+                        <span class="section-label">Behind the sound</span>
+                        <h2 class="section-head__title mb-0" data-split="lines">From the <em>pit</em></h2>
+                    </div>
+                    <a href="gallery.php" class="link-arrow">Full gallery <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+
+                <div class="filter-grid gallery-grid gallery-grid--spans" data-filter-grid data-reveal-group data-stagger="0.06">
+                    <?php for ($i = 1; $i <= 8; $i++):
+                        $full = "assets/images/gallery-2-$i.jpg";
+                        $thumb = "assets/images/gallery-2-$i-thumb.jpg";
+                    ?>
+                    <div class="filter-grid__item" data-category="live">
+                        <a href="<?= vebra_escape($full) ?>" class="gallery-tile"
+                            data-lightbox="image" data-gallery="home-vebra"
+                            data-src="<?= vebra_escape($full) ?>"
+                            data-caption="VEBRA live — frame <?= $i ?>" data-cursor="View">
+                            <img src="<?= vebra_escape($thumb) ?>" alt="VEBRA live frame <?= $i ?>" loading="lazy">
+                            <span class="gallery-tile__zoom"><i class="ri-zoom-in-line"></i></span>
+                            <span class="gallery-tile__caption">
+                                <span class="gallery-tile__title">Frame <?= str_pad((string)$i, 2, '0', STR_PAD_LEFT) ?></span>
+                                <span class="gallery-tile__meta">Live / Studio</span>
+                            </span>
+                        </a>
+                    </div>
+                    <?php endfor; ?>
+                    <p class="filter-empty">No photos in this category yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESS REVIEWS -->
+        <section class="section section--alt vebra-press-section" data-slider-scope>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">What the press says</span>
+                        <h2 class="section-head__title" data-split="lines">Words about the <em>music</em></h2>
+                    </div>
+                </div>
+
+                <div class="swiper vebra-press-slider" data-slider="testimonials">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <blockquote class="vebra-quote">
+                                <p>&ldquo;VEBRA builds soundscapes that are both towering and intensely intimate. An essential modern listening experience.&rdquo;</p>
+                                <cite>— The Brooklyn Record</cite>
+                            </blockquote>
+                        </div>
+                        <div class="swiper-slide">
+                            <blockquote class="vebra-quote">
+                                <p>&ldquo;A rare band that sounds even bigger on stage than in the studio. Precision, power, and genuine feeling.&rdquo;</p>
+                                <cite>— Soundwave Magazine</cite>
+                            </blockquote>
+                        </div>
+                        <div class="swiper-slide">
+                            <blockquote class="vebra-quote">
+                                <p>&ldquo;Every song carries weight. Uncompromising production with vocals that cut straight through the noise.&rdquo;</p>
+                                <cite>— Tape &amp; Console</cite>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider-toolbar">
+                    <div class="swiper-pagination pagination-lines js-slider-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LATEST NEWS -->
+        <section class="section news-section" data-slider-scope>
+            <div class="container-vebra">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Latest news</span>
+                        <h2 class="section-head__title" data-split="lines">From the <em>journal</em></h2>
+                    </div>
+                    <a href="news-page.php" class="link-arrow">All news <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+
+                <div class="swiper swiper--clip" data-slider="news">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <article class="media-card news-card">
+                                <a href="news-page.php" class="media-card__media" data-cursor="Read">
+                                    <img src="assets/images/news-1.jpg" alt="Latest music releases" loading="lazy">
+                                    <span class="card-icon"><i class="ri-arrow-right-up-line"></i></span>
+                                </a>
+                                <div class="media-card__body">
+                                    <div class="media-card__meta"><span class="news-card__category">Releases</span></div>
+                                    <h3 class="media-card__title"><a href="discography.php">Discover the latest releases</a></h3>
+                                    <p class="media-card__excerpt">Explore new music from the VEBRA catalogue.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="media-card news-card">
+                                <a href="video-gallery.php" class="media-card__media" data-cursor="Watch">
+                                    <img src="assets/images/news-2.jpg" alt="Music video collection" loading="lazy">
+                                    <span class="card-icon"><i class="ri-arrow-right-up-line"></i></span>
+                                </a>
+                                <div class="media-card__body">
+                                    <div class="media-card__meta"><span class="news-card__category">Video</span></div>
+                                    <h3 class="media-card__title"><a href="video-gallery.php">Watch the latest visuals</a></h3>
+                                    <p class="media-card__excerpt">Music videos and visual stories from the artists.</p>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="swiper-slide">
+                            <article class="media-card news-card">
+                                <a href="artists.php" class="media-card__media" data-cursor="Explore">
+                                    <img src="assets/images/news-3.jpg" alt="Featured artists" loading="lazy">
+                                    <span class="card-icon"><i class="ri-arrow-right-up-line"></i></span>
+                                </a>
+                                <div class="media-card__body">
+                                    <div class="media-card__meta"><span class="news-card__category">Artists</span></div>
+                                    <h3 class="media-card__title"><a href="artists.php">Meet the artists behind the sound</a></h3>
+                                    <p class="media-card__excerpt">Find artists and explore their releases.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider-toolbar">
+                    <div class="swiper-pagination pagination-lines js-slider-pagination"></div>
+                    <div class="slider-nav">
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-prev" aria-label="Previous news"><i class="ri-arrow-left-line"></i></button>
+                        <button type="button" class="btn-circle slider-nav__btn js-slider-next" aria-label="Next news"><i class="ri-arrow-right-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+<?php
+$extraScripts = <<<'EOD'
+    <!-- Small UI sync for the featured player; existing main.js remains untouched. -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('.vebra-player-song');
+        const title = document.getElementById('vebra-player-title');
+        const artist = document.getElementById('vebra-player-artist');
+        const cover = document.getElementById('vebra-player-cover');
+
+        rows.forEach(function (row) {
+            row.addEventListener('click', function () {
+                rows.forEach(function (item) {
+                    item.classList.remove('is-active');
+                });
+
+                row.classList.add('is-active');
+
+                if (title) title.textContent = row.dataset.title || '';
+                if (artist) artist.textContent = row.dataset.artist || '';
+
+                if (cover && row.dataset.cover) {
+                    cover.style.opacity = '0.25';
+                    window.setTimeout(function () {
+                        cover.src = row.dataset.cover;
+                        cover.onload = function () {
+                            cover.style.opacity = '1';
+                        };
+                    }, 120);
+                }
+            });
+        });
+    });
+    </script>
+EOD;
+require_once __DIR__ . '/includes/footer.php';
+?>

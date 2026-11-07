@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nightform — Limited Vinyl | vebra</title>
+    <meta name="description" content="Nightform limited edition double vinyl — 180g pressing with foil sleeve and download card.">
+    <meta name="keywords" content="musician, band, dj, festival, record label, music template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+
+    <!-- Favicon -->
+    <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;display=swap">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../assets/css/vendor/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../assets/icon-fonts/remixicon/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <!-- Motion is opt-in: without JS (or with reduced motion) content renders as-is -->
+<script src="../assets/js/no-fouc.js"></script>
+</head>
+
+<body class="theme-chartreuse">
+    <!-- Outline filter — traces the silhouette of every outlined ("ghost")
+         text on the page. Keep it: the display faces are built from
+         overlapping sub-paths, which a plain text-stroke would expose. -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <filter id="vebra-outline" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceGraphic" result="solid">
+                <feFuncA type="linear" slope="255"/>
+            </feComponentTransfer>
+            <feMorphology in="solid" operator="erode" radius="1" result="core"/>
+            <feComposite in="solid" in2="core" operator="out" result="rim"/>
+            <feComposite in="rim" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </svg>
+
+
+    <!-- PRELOADER
+    ============================================= -->
+    <div class="preloader">
+        <div class="preloader__curtain">
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+        </div>
+        <div class="preloader__inner">
+            <div class="preloader__word">vebra</div>
+            <p class="preloader__tagline">Sound in its purest form</p>
+            <div class="preloader__bar"><span class="preloader__bar-fill"></span></div>
+        </div>
+        <div class="preloader__count">00</div>
+    </div>
+
+    <!-- Decorative layers -->
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span class="cursor-ring__label"></span></div>
+
+
+    <!-- HEADER
+    ============================================= -->
+    <header class="site-header site-header--float">
+        <div class="site-header__inner">
+            <a href="../index.php" class="site-logo" aria-label="vebra — home">
+                <span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+            <ul class="nav__list">
+                <li class="nav__item has-children">
+                    <a href="../index.php" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Home">Home</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="discography.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Discography">Discography</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="discography.html">Albums</a></li>
+                        <li><a href="single-album.html">Single Album</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children is-active">
+                    <a href="shop-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Shop">Shop</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="shop-page.html">All Products</a></li>
+                        <li class="is-active"><a href="single-product.html">Single Product</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="news-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="News">News</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="news-page.html">All News</a></li>
+                        <li><a href="single-news.html">Single News</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <button type="button" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Pages">Pages</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="nav__sub">
+                        <li class="has-children">
+                            <a href="events.html">Events<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="events.html">All Events</a></li>
+                                <li><a href="single-event.html">Single Event</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li class="has-children">
+                            <a href="video-gallery.html">Videos<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="video-gallery.html">Video Gallery</a></li>
+                                <li><a href="single-video.html">Single Video</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="shop-page.html" class="cart-button" aria-label="Cart, 2 items">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-button__count">2</span>
+                </a>
+                <button type="button" class="menu-trigger" data-magnetic="0.25" aria-expanded="false" aria-controls="overlay-menu">
+                    <span class="menu-trigger__label btn__label">Menu</span>
+                    <span class="menu-trigger__bars" aria-hidden="true"><span></span><span></span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- OVERLAY MENU
+    ============================================= -->
+    <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+
+        <div class="overlay-menu__inner">
+            <nav class="overlay-nav" aria-label="Fullscreen">
+                <div class="overlay-nav__item">
+                    <a href="../index.php" class="overlay-nav__link">
+                        <span class="overlay-nav__index">01</span> Home
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Home links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="../index.php">Home 1</a></li>
+                            <li><a href="demo-2.html">Home 2</a></li>
+                            <li><a href="demo-3.html">Home 3</a></li>
+                            <li><a href="demo-4.html">Home 4</a></li>
+                            <li><a href="demo-5.html">Home 5</a></li>
+                            <li><a href="demo-6.html">Home 6</a></li>
+                            <li><a href="demo-7.html">Home 7</a></li>
+                            <li><a href="demo-8.html">Home 8</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="discography.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">02</span> Discography
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Discography links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="discography.html">Albums</a></li>
+                            <li><a href="single-album.html">Single Album</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="shop-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">03</span> Shop
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Shop links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="shop-page.html">All Products</a></li>
+                            <li class="is-active"><a href="single-product.html">Single Product</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="news-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">04</span> News
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle News links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="news-page.html">All News</a></li>
+                            <li><a href="single-news.html">Single News</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <button type="button" class="overlay-nav__link overlay-nav__link--group">
+                        <span class="overlay-nav__index">05</span> Pages
+                    </button>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Pages links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list overlay-nav__sub-list--grouped">
+                            <li class="overlay-nav__group">
+                                <a href="events.html">Events</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="events.html">All Events</a></li>
+                                    <li><a href="single-event.html">Single Event</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li class="overlay-nav__group">
+                                <a href="video-gallery.html">Videos</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="video-gallery.html">Video Gallery</a></li>
+                                    <li><a href="single-video.html">Single Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+            </nav>
+
+            <aside class="overlay-aside" aria-label="Contact details">
+                <div class="overlay-aside__group">
+                    <span class="label">Bookings</span>
+                    <a href="mailto:hello@vebra.com" class="overlay-aside__value">hello@vebra.com</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Management</span>
+                    <a href="tel:+15550142200" class="overlay-aside__value">+1 (555) 014 2200</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Studio</span>
+                    <p class="footer-text">218 Rivington Street<br>Brooklyn, NY 11206</p>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Follow</span>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+                <div class="overlay-aside__gallery">
+                    <img src="../assets/images/gallery-1.jpg" alt="Live show">
+                    <img src="../assets/images/gallery-2.jpg" alt="Backstage">
+                    <img src="../assets/images/gallery-3.jpg" alt="Studio session">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+
+<main id="main">
+
+    <!-- PRODUCT
+    ============================================= -->
+    <section class="section section--glow product-section">
+        <div class="container-vebra">
+            <ul class="breadcrumb-vebra product-section__crumbs">
+                <li><a href="../index.php">Home</a></li>
+                <li class="breadcrumb-vebra__sep" aria-hidden="true">/</li>
+                <li><a href="shop-page.html">Shop</a></li>
+                <li class="breadcrumb-vebra__sep" aria-hidden="true">/</li>
+                <li aria-current="page">Nightform — Double Vinyl</li>
+            </ul>
+
+            <div class="product-detail">
+                <div class="product-detail__gallery">
+                    <div class="product-detail__main" data-reveal="mask" data-cursor="Zoom">
+                        <img src="../assets/images/product-1.jpg" alt="Nightform limited double vinyl — front sleeve">
+                    </div>
+                    <div class="product-detail__thumbs">
+                        <button type="button" class="is-active" aria-label="View front sleeve">
+                            <img src="../assets/images/product-1.jpg" alt="Front sleeve">
+                        </button>
+                        <button type="button" aria-label="View gatefold">
+                            <img src="../assets/images/product-2.jpg" alt="Gatefold interior">
+                        </button>
+                        <button type="button" aria-label="View labels">
+                            <img src="../assets/images/product-3.jpg" alt="Record labels">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-detail__body">
+                    <span class="section-label">Vinyl &middot; Limited to 1,000</span>
+
+                    <h1 class="product-detail__title" data-split="lines" data-split-hero>Nightform</h1>
+
+                    <span class="price product-detail__price">$38.00<del>$46.00</del></span>
+
+                    <div class="product-card__rating" aria-label="Rated 5 out of 5" role="img">
+                        <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i>
+                        <span>42 reviews</span>
+                    </div>
+
+                    <p class="section-head__text" data-reveal="up">
+                        The 2026 album on 180g double vinyl, cut at 45rpm from the original tape transfers.
+                        Foil-blocked gatefold sleeve, twelve-page insert of Catskills session photographs
+                        and a lossless download card tucked behind side D.
+                    </p>
+
+                    <div class="stack stack-2">
+                        <span class="label">Bundle size</span>
+                        <div class="swatches">
+                            <button type="button" class="swatch">S</button>
+                            <button type="button" class="swatch is-active">M</button>
+                            <button type="button" class="swatch">L</button>
+                            <button type="button" class="swatch">XL</button>
+                        </div>
+                    </div>
+
+                    <div class="product-detail__buy">
+                        <div class="qty">
+                            <button type="button" data-step="down" aria-label="Decrease quantity"><i class="ri-subtract-line"></i></button>
+                            <input type="number" value="1" min="1" aria-label="Quantity">
+                            <button type="button" data-step="up" aria-label="Increase quantity"><i class="ri-add-line"></i></button>
+                        </div>
+                        <a href="#" class="btn btn--solid" data-magnetic="0.3"><span class="btn__label">Add to cart <i class="ri-shopping-bag-line"></i></span></a>
+                        <button type="button" class="btn-circle" aria-label="Add Nightform vinyl to wishlist"><i class="ri-heart-line"></i></button>
+                    </div>
+
+                    <div class="info-list">
+                        <div class="info-list__row">
+                            <span class="info-list__label">SKU</span>
+                            <span class="info-list__value">ECH-NF-2LP-001</span>
+                        </div>
+                        <div class="info-list__row">
+                            <span class="info-list__label">Category</span>
+                            <span class="info-list__value">Vinyl &middot; Albums</span>
+                        </div>
+                        <div class="info-list__row">
+                            <span class="info-list__label">Shipping</span>
+                            <span class="info-list__value">Free over $75 &middot; Ships in 3 days</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-tabs" data-tabs-scope>
+                <div class="tabs" data-tabs>
+                    <button type="button" class="tabs__btn is-active" data-tab="description">Description</button>
+                    <button type="button" class="tabs__btn" data-tab="details">Details</button>
+                    <button type="button" class="tabs__btn" data-tab="shipping">Shipping</button>
+                    <span class="tabs__indicator" aria-hidden="true"></span>
+                </div>
+
+                <div class="tabs__panel is-active" data-tab-panel="description">
+                    <div class="rich-text">
+                        <p>
+                            Nightform was tracked over six weeks in a converted barn two hours north of the city,
+                            mostly live to tape with the doors open. What you hear on this pressing is the room
+                            as much as the band — the hum of the old Studer, rain on the roof of side C, the
+                            five of us standing close enough to breathe on each other.
+                        </p>
+                        <p>
+                            We asked Bernie at Sterling to cut it loud but honest. The result is a record that
+                            rewards volume without flattening the quiet parts. If you only own one vebra
+                            artefact, we would like it to be this one.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tabs__panel" data-tab-panel="details">
+                    <div class="rich-text">
+                        <p>
+                            Two 180g black vinyl records in a foil-blocked gatefold sleeve, printed on uncoated
+                            board with a matte varnish. Twelve-page insert, hand-numbered on the rear. Each
+                            copy carries a download card for 24-bit lossless files of the full album plus two
+                            unreleased takes.
+                        </p>
+                        <ul>
+                            <li>Cut at 45rpm from original 2&Prime; tape transfers</li>
+                            <li>Pressed at Third Man, Detroit — edition of 1,000</li>
+                            <li>Sleeve photography by Mara Okonkwo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tabs__panel" data-tab-panel="shipping">
+                    <div class="rich-text">
+                        <p>
+                            Orders leave our Brooklyn studio within three working days in rigid record mailers.
+                            US shipping is free over $75; international rates are calculated at checkout and
+                            typically land within ten to fourteen days.
+                        </p>
+                        <p>
+                            Anything that arrives damaged gets replaced, no questions — write to
+                            <a href="mailto:hello@vebra.com">hello@vebra.com</a> with a photo and your order number.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- STORE
+    ============================================= -->
+    <section class="section section--alt">
+        <div class="container-vebra">
+            <div class="section-head">
+                <div>
+                    <span class="section-label">Related</span>
+                    <h2 class="section-head__title" data-split="lines">You may also <em>like</em></h2>
+                </div>
+                <a href="shop-page.html" class="link-arrow" data-magnetic="0.2">All products <i class="ri-arrow-right-up-line"></i></a>
+            </div>
+
+            <div class="products-grid" data-reveal-group data-stagger="0.09">
+                <!-- Product -->
+                <article class="product-card">
+                    <div class="product-card__media" data-hover-scope data-cursor="View">
+                        <a href="single-product.html" aria-label="Rivington work jacket">
+                            <img src="../assets/images/Product-4.jpg" data-hover-src="../assets/images/Product-5.jpg" alt="Rivington embroidered work jacket">
+                        </a>
+                        <span class="pill product-card__badge">2 left</span>
+                        <div class="product-card__action">
+                            <a href="single-product.html" class="btn btn--solid btn--sm"><span class="btn__label">Add to cart</span></a>
+                            <button type="button" class="btn-circle" aria-label="Add work jacket to wishlist"><i class="ri-heart-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-card__body">
+                        <div>
+                            <h3 class="product-card__title"><a href="single-product.html">Rivington Work Jacket</a></h3>
+                            <span class="product-card__cat">Apparel</span>
+                        </div>
+                        <span class="price">$120.00</span>
+                    </div>
+                </article>
+
+                <!-- Product -->
+                <article class="product-card">
+                    <div class="product-card__media" data-hover-scope data-cursor="View">
+                        <a href="single-product.html" aria-label="Nightform enamel pin set">
+                            <img src="../assets/images/Product-5.jpg" data-hover-src="../assets/images/Product-6.jpg" alt="Nightform enamel pin set">
+                        </a>
+                        <span class="pill product-card__badge">Sale</span>
+                        <div class="product-card__action">
+                            <a href="single-product.html" class="btn btn--solid btn--sm"><span class="btn__label">Add to cart</span></a>
+                            <button type="button" class="btn-circle" aria-label="Add pin set to wishlist"><i class="ri-heart-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-card__body">
+                        <div>
+                            <h3 class="product-card__title"><a href="single-product.html">Enamel Pin Set</a></h3>
+                            <span class="product-card__cat">Accessories</span>
+                        </div>
+                        <span class="price">$14.00<del>$18.00</del></span>
+                    </div>
+                </article>
+
+                <!-- Product -->
+                <article class="product-card">
+                    <div class="product-card__media" data-hover-scope data-cursor="View">
+                        <a href="single-product.html" aria-label="Hand numbered screen print">
+                            <img src="../assets/images/Product-6.jpg" data-hover-src="../assets/images/product-1.jpg" alt="Hand-numbered screen print">
+                        </a>
+                        <span class="pill pill--accent product-card__badge">Signed</span>
+                        <div class="product-card__action">
+                            <a href="single-product.html" class="btn btn--solid btn--sm"><span class="btn__label">Add to cart</span></a>
+                            <button type="button" class="btn-circle" aria-label="Add screen print to wishlist"><i class="ri-heart-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-card__body">
+                        <div>
+                            <h3 class="product-card__title"><a href="single-product.html">Screen Print — Hand Numbered</a></h3>
+                            <span class="product-card__cat">Accessories</span>
+                        </div>
+                        <span class="price">$45.00</span>
+                    </div>
+                </article>
+
+                <!-- Product -->
+                <article class="product-card">
+                    <div class="product-card__media" data-hover-scope data-cursor="View">
+                        <a href="single-product.html" aria-label="Halogen 12 inch single">
+                            <img src="../assets/images/product-2.jpg" data-hover-src="../assets/images/product-3.jpg" alt="Halogen 12 inch single">
+                        </a>
+                        <span class="pill product-card__badge">Sale</span>
+                        <div class="product-card__action">
+                            <a href="single-product.html" class="btn btn--solid btn--sm"><span class="btn__label">Add to cart</span></a>
+                            <button type="button" class="btn-circle" aria-label="Add Halogen single to wishlist"><i class="ri-heart-line"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-card__body">
+                        <div>
+                            <h3 class="product-card__title"><a href="single-product.html">Halogen — 12&Prime; Single</a></h3>
+                            <span class="product-card__cat">Vinyl</span>
+                        </div>
+                        <span class="price">$22.00<del>$28.00</del></span>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER
+    ============================================= -->
+    <footer class="site-footer">
+        <div class="site-footer__bg" aria-hidden="true">
+            <img src="../assets/images/footer-image.jpg" alt="">
+        </div>
+        <div class="site-footer__glow" aria-hidden="true"></div>
+
+        <div class="container-vebra">
+            <div class="footer-marquee marquee" data-velocity>
+                <div class="marquee__track">
+                    <span class="marquee__item">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                </div>
+            </div>
+
+            <div class="footer-cta">
+                <h2 class="footer-cta__title" data-split="lines">Let&rsquo;s make something <em>loud</em></h2>
+                <a href="mailto:hello@vebra.com" class="btn btn--solid btn--lg" data-magnetic="0.3"><span class="btn__label">hello@vebra.com <i class="ri-arrow-right-up-line"></i></span></a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <a href="../index.php" class="site-logo"><span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span></a>
+                    <p class="footer-text">A five-piece from Brooklyn making records that sound better loud. Booking and press enquiries welcome.</p>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Explore</h3>
+                    <div class="footer-links">
+                        <a href="discography.html">Discography</a>
+                        <a href="events.html">Events</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="video-gallery.html">Videos</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">More</h3>
+                    <div class="footer-links">
+                        <a href="shop-page.html">Shop</a>
+                        <a href="news-page.html">News</a>
+                        <a href="artists.html">Artists</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Newsletter</h3>
+                    <p class="footer-text">Tour dates and releases, no noise.</p>
+                    <form class="form-inline footer-newsletter" data-stub-form data-success-message="You're on the list — see you at the next show.">
+                        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+                        <button type="submit" aria-label="Subscribe"><i class="ri-arrow-right-line"></i></button>
+                    </form>
+                    <p class="form-message"></p>
+                </div>
+            </div>
+
+            <div class="footer-wordmark-wrap">
+                <a href="../index.php" class="footer-wordmark" aria-hidden="true" tabindex="-1">vebra</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 vebra Band — All rights reserved.</p>
+                <div class="footer-bottom__links">
+                    <a href="typography.html">Typography</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Licence</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/vendor/gsap.min.js"></script>
+    <script src="../assets/js/vendor/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/vendor/SplitText.min.js"></script>
+    <script src="../assets/js/vendor/lenis.min.js"></script>
+    <script src="../assets/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

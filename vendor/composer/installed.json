@@ -1,0 +1,26 @@
+{
+    "packages": [
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "6.10.0",
+            "version_normalized": "6.10.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/PHPMailer/PHPMailer/archive/refs/tags/v6.10.0.zip"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "PHPMailer\\PHPMailer\\": "src/"
+                }
+            },
+            "license": [
+                "LGPL-2.1-only"
+            ],
+            "install-path": "../phpmailer/phpmailer"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}

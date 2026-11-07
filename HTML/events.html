@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All Events &mdash; vebra</title>
+    <meta name="description" content="Every vebra live date for 2026 — nine shows across Europe and a homecoming night in Brooklyn.">
+    <meta name="keywords" content="musician, band, dj, festival, record label, music template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+
+    <!-- Favicon -->
+    <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;display=swap">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../assets/css/vendor/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../assets/icon-fonts/remixicon/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <!-- Motion is opt-in: without JS (or with reduced motion) content renders as-is -->
+<script src="../assets/js/no-fouc.js"></script>
+</head>
+
+<body class="theme-chartreuse">
+    <!-- Outline filter — traces the silhouette of every outlined ("ghost")
+         text on the page. Keep it: the display faces are built from
+         overlapping sub-paths, which a plain text-stroke would expose. -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <filter id="vebra-outline" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceGraphic" result="solid">
+                <feFuncA type="linear" slope="255"/>
+            </feComponentTransfer>
+            <feMorphology in="solid" operator="erode" radius="1" result="core"/>
+            <feComposite in="solid" in2="core" operator="out" result="rim"/>
+            <feComposite in="rim" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </svg>
+
+
+    <!-- PRELOADER
+    ============================================= -->
+    <div class="preloader">
+        <div class="preloader__curtain">
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+        </div>
+        <div class="preloader__inner">
+            <div class="preloader__word">vebra</div>
+            <p class="preloader__tagline">Sound in its purest form</p>
+            <div class="preloader__bar"><span class="preloader__bar-fill"></span></div>
+        </div>
+        <div class="preloader__count">00</div>
+    </div>
+
+    <!-- Decorative layers -->
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span class="cursor-ring__label"></span></div>
+
+
+    <!-- HEADER
+    ============================================= -->
+    <header class="site-header site-header--float">
+        <div class="site-header__inner">
+            <a href="../index.php" class="site-logo" aria-label="vebra — home">
+                <span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+            <ul class="nav__list">
+                <li class="nav__item has-children">
+                    <a href="../index.php" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Home">Home</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                 
+                </li>
+                <li class="nav__item has-children">
+                    <a href="discography.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Discography">Discography</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="discography.html">Albums</a></li>
+                        <li><a href="single-album.html">Single Album</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="shop-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Shop">Shop</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="shop-page.html">All Products</a></li>
+                        <li><a href="single-product.html">Single Product</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="news-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="News">News</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="news-page.html">All News</a></li>
+                        <li><a href="single-news.html">Single News</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children is-active">
+                    <button type="button" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Pages">Pages</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="nav__sub">
+                        <li class="has-children is-active">
+                            <a href="events.html">Events<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li class="is-active"><a href="events.html">All Events</a></li>
+                                <li><a href="single-event.html">Single Event</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li class="has-children">
+                            <a href="video-gallery.html">Videos<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="video-gallery.html">Video Gallery</a></li>
+                                <li><a href="single-video.html">Single Video</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="shop-page.html" class="cart-button" aria-label="Cart, 2 items">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-button__count">2</span>
+                </a>
+                <button type="button" class="menu-trigger" data-magnetic="0.25" aria-expanded="false" aria-controls="overlay-menu">
+                    <span class="menu-trigger__label btn__label">Menu</span>
+                    <span class="menu-trigger__bars" aria-hidden="true"><span></span><span></span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- OVERLAY MENU
+    ============================================= -->
+    <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+
+        <div class="overlay-menu__inner">
+            <nav class="overlay-nav" aria-label="Fullscreen">
+                <div class="overlay-nav__item">
+                    <a href="../index.php" class="overlay-nav__link">
+                        <span class="overlay-nav__index">01</span> Home
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Home links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="../index.php">Home 1</a></li>
+                            <li><a href="demo-2.html">Home 2</a></li>
+                            <li><a href="demo-3.html">Home 3</a></li>
+                            <li><a href="demo-4.html">Home 4</a></li>
+                            <li><a href="demo-5.html">Home 5</a></li>
+                            <li><a href="demo-6.html">Home 6</a></li>
+                            <li><a href="demo-7.html">Home 7</a></li>
+                            <li><a href="demo-8.html">Home 8</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="discography.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">02</span> Discography
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Discography links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="discography.html">Albums</a></li>
+                            <li><a href="single-album.html">Single Album</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="shop-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">03</span> Shop
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Shop links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="shop-page.html">All Products</a></li>
+                            <li><a href="single-product.html">Single Product</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="news-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">04</span> News
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle News links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="news-page.html">All News</a></li>
+                            <li><a href="single-news.html">Single News</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <button type="button" class="overlay-nav__link overlay-nav__link--group">
+                        <span class="overlay-nav__index">05</span> Pages
+                    </button>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Pages links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list overlay-nav__sub-list--grouped">
+                            <li class="overlay-nav__group is-active">
+                                <a href="events.html">Events</a>
+                                <ul class="overlay-nav__nested">
+                                    <li class="is-active"><a href="events.html">All Events</a></li>
+                                    <li><a href="single-event.html">Single Event</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li class="overlay-nav__group">
+                                <a href="video-gallery.html">Videos</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="video-gallery.html">Video Gallery</a></li>
+                                    <li><a href="single-video.html">Single Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+            </nav>
+
+            <aside class="overlay-aside" aria-label="Contact details">
+                <div class="overlay-aside__group">
+                    <span class="label">Bookings</span>
+                    <a href="mailto:hello@vebra.com" class="overlay-aside__value">hello@vebra.com</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Management</span>
+                    <a href="tel:+15550142200" class="overlay-aside__value">+1 (555) 014 2200</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Studio</span>
+                    <p class="footer-text">218 Rivington Street<br>Brooklyn, NY 11206</p>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Follow</span>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+                <div class="overlay-aside__gallery">
+                    <img src="../assets/images/gallery-1.jpg" alt="Live show">
+                    <img src="../assets/images/gallery-2.jpg" alt="Backstage">
+                    <img src="../assets/images/gallery-3.jpg" alt="Studio session">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+
+<main id="main">
+
+    <!-- PAGE CAPTION TYPE 2
+    ============================================= -->
+    <section class="page-caption" data-parallax-scope>
+        <div class="page-caption__bg" aria-hidden="true">
+            <img src="../assets/images/page-cover-2.jpg" alt="" data-parallax-speed="0.15">
+        </div>
+
+        <div class="container-vebra">
+            <div class="page-caption__inner">
+                <ul class="breadcrumb-vebra">
+                    <li><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-vebra__sep">/</li>
+                    <li aria-current="page">Events</li>
+                </ul>
+
+                <h1 class="page-caption__title" data-split="chars" data-split-hero>
+                    All events
+                    <span class="page-caption__ghost" aria-hidden="true">On tour</span>
+                </h1>
+
+                <p class="page-caption__text" data-reveal="up" data-delay="0.25">
+                    The full <strong>Nightform</strong> run &mdash; nine shows across Europe and one homecoming
+                    night in Brooklyn. New dates are announced the first Monday of every month.
+                </p>
+
+                <div class="page-caption__meta" data-reveal="up" data-delay="0.35">
+                    <div class="page-caption__stat"><strong data-count-to="9">0</strong><span>Shows</span></div>
+                    <div class="page-caption__stat"><strong data-count-to="8">0</strong><span>Cities</span></div>
+                    <div class="page-caption__stat"><strong data-count-to="2">0</strong><span>Sold out</span></div>
+                    <div class="page-caption__stat"><strong>2026</strong><span>Season</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- UPCOMING GIGS
+    ============================================= -->
+    <section class="section gigs" data-tabs-scope data-preview-scope>
+        <div class="gigs__bg" aria-hidden="true">
+            <img src="../assets/images/gigs-bg.png" alt="">
+        </div>
+
+        <div class="container-vebra">
+            <div class="section-head">
+                <div>
+                    <span class="section-label">Upcoming gigs</span>
+                    <h2 class="section-head__title" data-split="lines">On the <em>road</em> in 2026</h2>
+                </div>
+                <div class="stack stack-3">
+                    <p class="section-head__text">Tickets go on general sale at 10:00 local time. The mailing list gets them a day early.</p>
+                    <a href="contact.html" class="link-arrow" data-magnetic="0.2">Booking enquiries <i class="ri-arrow-right-up-line"></i></a>
+                </div>
+            </div>
+
+            <div class="tabs" data-tabs role="tablist" aria-label="Filter gigs by month">
+                <button type="button" class="tabs__btn is-active" data-tab="all" role="tab" id="tab-all" aria-controls="panel-all" aria-selected="true">All<sup>9</sup></button>
+                <button type="button" class="tabs__btn" data-tab="may" role="tab" id="tab-may" aria-controls="panel-may" aria-selected="false">May<sup>3</sup></button>
+                <button type="button" class="tabs__btn" data-tab="june" role="tab" id="tab-june" aria-controls="panel-june" aria-selected="false">June<sup>3</sup></button>
+                <button type="button" class="tabs__btn" data-tab="july" role="tab" id="tab-july" aria-controls="panel-july" aria-selected="false">July<sup>3</sup></button>
+                <span class="tabs__indicator" aria-hidden="true"></span>
+            </div>
+
+                <div class="tabs__panel is-active" data-tab-panel="all" role="tabpanel" id="panel-all" aria-labelledby="tab-all">
+                    <div class="gigs__list">
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-1.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">14</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">London</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Eventim Apollo</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>21:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-2.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">19</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Manchester</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Albert Hall</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-3.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">25</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Amsterdam</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>AFAS Live</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>19:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row gig-row--sold" data-reveal="up" data-preview-src="../assets/images/gallery-4.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">02</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Vienna</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Wiener Stadthalle</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <span class="gig-row__sold">Sold out</span>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-5.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">10</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Cologne</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Lanxess Arena</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>22:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-6.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">21</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Paris</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Le Trianon</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-7.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">04</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Lisbon</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Coliseu dos Recreios</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>21:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row gig-row--sold" data-reveal="up" data-preview-src="../assets/images/gallery-8.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">12</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Barcelona</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Sala Apolo</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>22:00</span>
+                            <div class="gig-row__action">
+                                <span class="gig-row__sold">Sold out</span>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-5.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">26</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Brooklyn</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Kings Theatre</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs__panel" data-tab-panel="may" role="tabpanel" id="panel-may" aria-labelledby="tab-may">
+                    <div class="gigs__list">
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-1.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">14</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">London</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Eventim Apollo</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>21:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-2.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">19</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Manchester</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Albert Hall</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-3.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">25</span>
+                                <span class="gig-row__month"><strong>May</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Amsterdam</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>AFAS Live</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>19:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs__panel" data-tab-panel="june" role="tabpanel" id="panel-june" aria-labelledby="tab-june">
+                    <div class="gigs__list">
+                        <div class="gig-row gig-row--sold" data-reveal="up" data-preview-src="../assets/images/gallery-4.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">02</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Vienna</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Wiener Stadthalle</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <span class="gig-row__sold">Sold out</span>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-5.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">10</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Cologne</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Lanxess Arena</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>22:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-6.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">21</span>
+                                <span class="gig-row__month"><strong>June</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Paris</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Le Trianon</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tabs__panel" data-tab-panel="july" role="tabpanel" id="panel-july" aria-labelledby="tab-july">
+                    <div class="gigs__list">
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-7.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">04</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Lisbon</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Coliseu dos Recreios</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>21:30</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+
+                        <div class="gig-row gig-row--sold" data-reveal="up" data-preview-src="../assets/images/gallery-8.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">12</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Barcelona</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Sala Apolo</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>22:00</span>
+                            <div class="gig-row__action">
+                                <span class="gig-row__sold">Sold out</span>
+                            </div>
+                        </div>
+
+                        <div class="gig-row" data-reveal="up" data-preview-src="../assets/images/gallery-5.jpg">
+                            <div class="gig-row__date">
+                                <span class="gig-row__day">26</span>
+                                <span class="gig-row__month"><strong>July</strong>2026</span>
+                            </div>
+                            <div class="gig-row__venue">
+                                <h3 class="gig-row__city">Brooklyn</h3>
+                                <span class="gig-row__place"><i class="ri-map-pin-line"></i>Kings Theatre</span>
+                            </div>
+                            <span class="gig-row__time"><i class="ri-time-line"></i>20:00</span>
+                            <div class="gig-row__action">
+                                <a href="single-event.html" class="btn btn--sm" data-magnetic="0.25"><span class="btn__label">Buy ticket</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="row-preview" aria-hidden="true"><img src="../assets/images/gallery-1.jpg" alt=""></div>
+
+            <nav class="pagination-vebra" aria-label="Events pages">
+                <span class="is-current">1</span>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#" aria-label="Next page"><i class="ri-arrow-right-line"></i></a>
+            </nav>
+        </div>
+    </section>
+
+
+    <!-- FOOTER
+    ============================================= -->
+    <footer class="site-footer">
+        <div class="site-footer__bg" aria-hidden="true">
+            <img src="../assets/images/footer-image.jpg" alt="">
+        </div>
+        <div class="site-footer__glow" aria-hidden="true"></div>
+
+        <div class="container-vebra">
+            <div class="footer-marquee marquee" data-velocity>
+                <div class="marquee__track">
+                    <span class="marquee__item">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                </div>
+            </div>
+
+            <div class="footer-cta">
+                <h2 class="footer-cta__title" data-split="lines">Let&rsquo;s make something <em>loud</em></h2>
+                <a href="mailto:hello@vebra.com" class="btn btn--solid btn--lg" data-magnetic="0.3"><span class="btn__label">hello@vebra.com <i class="ri-arrow-right-up-line"></i></span></a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <a href="../index.php" class="site-logo"><span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span></a>
+                    <p class="footer-text">A five-piece from Brooklyn making records that sound better loud. Booking and press enquiries welcome.</p>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Explore</h3>
+                    <div class="footer-links">
+                        <a href="discography.html">Discography</a>
+                        <a href="events.html">Events</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="video-gallery.html">Videos</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">More</h3>
+                    <div class="footer-links">
+                        <a href="shop-page.html">Shop</a>
+                        <a href="news-page.html">News</a>
+                        <a href="artists.html">Artists</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Newsletter</h3>
+                    <p class="footer-text">Tour dates and releases, no noise.</p>
+                    <form class="form-inline footer-newsletter" data-stub-form data-success-message="You're on the list — see you at the next show.">
+                        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+                        <button type="submit" aria-label="Subscribe"><i class="ri-arrow-right-line"></i></button>
+                    </form>
+                    <p class="form-message"></p>
+                </div>
+            </div>
+
+            <div class="footer-wordmark-wrap">
+                <a href="../index.php" class="footer-wordmark" aria-hidden="true" tabindex="-1">vebra</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 vebra Band — All rights reserved.</p>
+                <div class="footer-bottom__links">
+                    <a href="typography.html">Typography</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Licence</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/vendor/gsap.min.js"></script>
+    <script src="../assets/js/vendor/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/vendor/SplitText.min.js"></script>
+    <script src="../assets/js/vendor/lenis.min.js"></script>
+    <script src="../assets/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

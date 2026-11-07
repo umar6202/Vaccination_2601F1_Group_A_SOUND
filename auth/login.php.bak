@@ -1,0 +1,122 @@
+<?php
+require_once __DIR__ . '/../includes/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$error = '';
+$registeredMsg = isset($_GET['registered']) ? 'Registration successful! You can now log in.' : '';
+$redirectUrl = isset($_GET['redirect']) ? $_GET['redirect'] : '../index.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $loginIdentifier = trim($_POST['identifier'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if (empty($loginIdentifier) || empty($password)) {
+        $error = 'Please enter both your email/username and password.';
+    } else {
+        try {
+            $stmt = $pdo->prepare("SELECT id, username, name, email, password, role FROM users WHERE email = ? OR username = ? LIMIT 1");
+            $stmt->execute([$loginIdentifier, $loginIdentifier]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['role'] = $user['role'];
+
+                if ($user['role'] === 'admin') {
+                    header('Location: ../admin/index.php');
+                } else {
+                    header('Location: ' . $redirectUrl);
+                }
+                exit;
+            } else {
+                $error = 'Invalid email/username or password.';
+            }
+        } catch (Exception $e) {
+            $error = 'A database error occurred. Please try again.';
+        }
+    }
+}
+
+$pageTitle = 'Log In — vebra';
+$basePath = '../';
+$bodyClass = 'theme-magenta';
+$activePage = 'account';
+$activeSub = 'login';
+require_once __DIR__ . '/../includes/header.php';
+?>
+
+<main id="main">
+    <section class="page-caption" data-parallax-scope>
+        <div class="page-caption__bg" aria-hidden="true">
+            <img src="../assets/images/hero-1.jpg" alt="" data-parallax-speed="0.12">
+        </div>
+
+        <div class="container-vebra">
+            <div class="page-caption__inner" style="max-width: 560px; margin: 0 auto; text-align: center;">
+                <nav class="breadcrumb-vebra" aria-label="Breadcrumb" style="justify-content: center;">
+                    <a href="../index.php">Home</a>
+                    <span class="breadcrumb-vebra__sep">/</span>
+                    <span aria-current="page">Log In</span>
+                </nav>
+
+                <h1 class="page-caption__title" data-split="chars" data-split-hero style="margin-bottom: 12px;">
+                    Welcome back
+                    <span class="page-caption__ghost" aria-hidden="true">Log In</span>
+                </h1>
+
+                <p class="page-caption__text" data-reveal="up" data-delay="0.2">
+                    Log in to your VEBRA member account to rate tracks, post verified reviews, and unlock exclusive backstage drops.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 40px; padding-bottom: 80px;">
+        <div class="container-vebra">
+            <div style="max-width: 480px; margin: 0 auto; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; padding: 36px 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+
+                <?php if ($registeredMsg): ?>
+                    <div style="background: rgba(var(--accent-rgb), 0.15); border: 1px solid var(--accent); padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; color: #fff; font-size: 0.95rem;">
+                        <i class="ri-checkbox-circle-fill" style="color:var(--accent); margin-right:6px;"></i> <?= htmlspecialchars($registeredMsg) ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($error): ?>
+                    <div style="background: rgba(255, 60, 60, 0.15); border: 1px solid rgba(255, 60, 60, 0.5); padding: 14px 18px; border-radius: 6px; margin-bottom: 24px; color: #fff; font-size: 0.95rem;">
+                        <i class="ri-error-warning-fill" style="color:#ff5c5c; margin-right:6px;"></i> <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form method="POST" action="" class="contact-form">
+                    <div class="field" style="margin-bottom: 20px;">
+                        <input type="text" name="identifier" id="login-identifier" class="field__control" placeholder=" " required autofocus>
+                        <label for="login-identifier" class="field__label">Email or Username</label>
+                        <span class="field__line" aria-hidden="true"></span>
+                    </div>
+
+                    <div class="field" style="margin-bottom: 28px;">
+                        <input type="password" name="password" id="login-password" class="field__control" placeholder=" " required>
+                        <label for="login-password" class="field__label">Password</label>
+                        <span class="field__line" aria-hidden="true"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn--solid btn--block" data-magnetic="0.2" style="width: 100%; margin-bottom: 20px;">
+                        <span class="btn__label">Log In to VEBRA <i class="ri-arrow-right-line"></i></span>
+                    </button>
+
+                    <div style="text-align: center; color: var(--ink-40); font-size: 0.9rem;">
+                        Don't have an account yet? <a href="register.php" style="color: var(--accent); font-weight: 600; text-decoration: none;">Create one here</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<?php
+require_once __DIR__ . '/../includes/footer.php';
+?>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Inside the making of Nightform — vebra</title>
+    <meta name="description" content="Six weeks in a Catskills barn, two broken tape machines and the record that came out of it.">
+    <meta name="keywords" content="musician, band, dj, festival, record label, music template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0A0A0F">
+
+    <!-- Favicon -->
+    <link href="../favicon.svg" rel="icon" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@400;500;600&amp;display=swap">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/vendor/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../assets/css/vendor/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../assets/icon-fonts/remixicon/remixicon.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <!-- Motion is opt-in: without JS (or with reduced motion) content renders as-is -->
+<script src="../assets/js/no-fouc.js"></script>
+</head>
+
+<body class="theme-chartreuse">
+    <!-- Outline filter — traces the silhouette of every outlined ("ghost")
+         text on the page. Keep it: the display faces are built from
+         overlapping sub-paths, which a plain text-stroke would expose. -->
+    <svg class="svg-defs" aria-hidden="true" focusable="false">
+        <filter id="vebra-outline" color-interpolation-filters="sRGB">
+            <feComponentTransfer in="SourceGraphic" result="solid">
+                <feFuncA type="linear" slope="255"/>
+            </feComponentTransfer>
+            <feMorphology in="solid" operator="erode" radius="1" result="core"/>
+            <feComposite in="solid" in2="core" operator="out" result="rim"/>
+            <feComposite in="rim" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </svg>
+
+
+    <!-- PRELOADER
+    ============================================= -->
+    <div class="preloader">
+        <div class="preloader__curtain">
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+            <div class="preloader__panel"></div>
+        </div>
+        <div class="preloader__inner">
+            <div class="preloader__word">vebra</div>
+            <p class="preloader__tagline">Sound in its purest form</p>
+            <div class="preloader__bar"><span class="preloader__bar-fill"></span></div>
+        </div>
+        <div class="preloader__count">00</div>
+    </div>
+
+    <!-- Decorative layers -->
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-ring" aria-hidden="true"><span class="cursor-ring__label"></span></div>
+
+
+    <!-- HEADER
+    ============================================= -->
+    <header class="site-header site-header--float">
+        <div class="site-header__inner">
+            <a href="../index.php" class="site-logo" aria-label="vebra — home">
+                <span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span>
+            </a>
+            <nav class="nav" aria-label="Primary">
+            <ul class="nav__list">
+                <li class="nav__item has-children">
+                    <a href="../index.php" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Home">Home</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="discography.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Discography">Discography</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="discography.html">Albums</a></li>
+                        <li><a href="single-album.html">Single Album</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <a href="shop-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Shop">Shop</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="shop-page.html">All Products</a></li>
+                        <li><a href="single-product.html">Single Product</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children is-active">
+                    <a href="news-page.html" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="News">News</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </a>
+                    <ul class="nav__sub">
+                        <li><a href="news-page.html">All News</a></li>
+                        <li class="is-active"><a href="single-news.html">Single News</a></li>
+                    </ul>
+                </li>
+                <li class="nav__item has-children">
+                    <button type="button" class="nav__link">
+                        <span class="nav__link-inner"><span class="nav__link-text" data-text="Pages">Pages</span></span>
+                        <i class="ri-arrow-down-s-line"></i>
+                    </button>
+                    <ul class="nav__sub">
+                        <li class="has-children">
+                            <a href="events.html">Events<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="events.html">All Events</a></li>
+                                <li><a href="single-event.html">Single Event</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li class="has-children">
+                            <a href="video-gallery.html">Videos<i class="ri-arrow-right-s-line"></i></a>
+                            <ul class="nav__sub nav__sub--flyout">
+                                <li><a href="video-gallery.html">Video Gallery</a></li>
+                                <li><a href="single-video.html">Single Video</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+            </nav>
+            <div class="header-actions">
+                <a href="shop-page.html" class="cart-button" aria-label="Cart, 2 items">
+                    <i class="ri-shopping-bag-line"></i>
+                    <span class="cart-button__count">2</span>
+                </a>
+                <button type="button" class="menu-trigger" data-magnetic="0.25" aria-expanded="false" aria-controls="overlay-menu">
+                    <span class="menu-trigger__label btn__label">Menu</span>
+                    <span class="menu-trigger__bars" aria-hidden="true"><span></span><span></span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- OVERLAY MENU
+    ============================================= -->
+    <div class="overlay-menu" id="overlay-menu" aria-hidden="true">
+
+        <div class="overlay-menu__inner">
+            <nav class="overlay-nav" aria-label="Fullscreen">
+                <div class="overlay-nav__item">
+                    <a href="../index.php" class="overlay-nav__link">
+                        <span class="overlay-nav__index">01</span> Home
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Home links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="../index.php">Home 1</a></li>
+                            <li><a href="demo-2.html">Home 2</a></li>
+                            <li><a href="demo-3.html">Home 3</a></li>
+                            <li><a href="demo-4.html">Home 4</a></li>
+                            <li><a href="demo-5.html">Home 5</a></li>
+                            <li><a href="demo-6.html">Home 6</a></li>
+                            <li><a href="demo-7.html">Home 7</a></li>
+                            <li><a href="demo-8.html">Home 8</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="discography.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">02</span> Discography
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Discography links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="discography.html">Albums</a></li>
+                            <li><a href="single-album.html">Single Album</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="shop-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">03</span> Shop
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Shop links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="shop-page.html">All Products</a></li>
+                            <li><a href="single-product.html">Single Product</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <a href="news-page.html" class="overlay-nav__link">
+                        <span class="overlay-nav__index">04</span> News
+                    </a>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle News links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list">
+                            <li><a href="news-page.html">All News</a></li>
+                            <li class="is-active"><a href="single-news.html">Single News</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+
+                <div class="overlay-nav__item">
+                    <button type="button" class="overlay-nav__link overlay-nav__link--group">
+                        <span class="overlay-nav__index">05</span> Pages
+                    </button>
+                    <button type="button" class="overlay-nav__toggle" aria-expanded="false" aria-label="Toggle Pages links"><i class="ri-add-line"></i></button>
+                    <div class="overlay-nav__sub"><div>
+                        <ul class="overlay-nav__sub-list overlay-nav__sub-list--grouped">
+                            <li class="overlay-nav__group">
+                                <a href="events.html">Events</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="events.html">All Events</a></li>
+                                    <li><a href="single-event.html">Single Event</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li class="overlay-nav__group">
+                                <a href="video-gallery.html">Videos</a>
+                                <ul class="overlay-nav__nested">
+                                    <li><a href="video-gallery.html">Video Gallery</a></li>
+                                    <li><a href="single-video.html">Single Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div></div>
+                </div>
+            </nav>
+
+            <aside class="overlay-aside" aria-label="Contact details">
+                <div class="overlay-aside__group">
+                    <span class="label">Bookings</span>
+                    <a href="mailto:hello@vebra.com" class="overlay-aside__value">hello@vebra.com</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Management</span>
+                    <a href="tel:+15550142200" class="overlay-aside__value">+1 (555) 014 2200</a>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Studio</span>
+                    <p class="footer-text">218 Rivington Street<br>Brooklyn, NY 11206</p>
+                </div>
+                <div class="overlay-aside__group">
+                    <span class="label">Follow</span>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+                <div class="overlay-aside__gallery">
+                    <img src="../assets/images/gallery-1.jpg" alt="Live show">
+                    <img src="../assets/images/gallery-2.jpg" alt="Backstage">
+                    <img src="../assets/images/gallery-3.jpg" alt="Studio session">
+                </div>
+            </aside>
+        </div>
+    </div>
+
+
+<main id="main">
+
+    <!-- SINGLE NEWS
+    ============================================= -->
+    <section class="page-caption" data-parallax-scope>
+        <div class="page-caption__bg" aria-hidden="true">
+            <img src="../assets/images/news-1.jpg" alt="" data-parallax-speed="0.12">
+        </div>
+
+        <div class="container-vebra">
+            <div class="page-caption__inner">
+                <ul class="breadcrumb-vebra">
+                    <li><a href="../index.php">Home</a></li>
+                    <li class="breadcrumb-vebra__sep" aria-hidden="true">/</li>
+                    <li><a href="news-page.html">News</a></li>
+                    <li class="breadcrumb-vebra__sep" aria-hidden="true">/</li>
+                    <li aria-current="page">Inside the making of Nightform</li>
+                </ul>
+
+                <h1 class="page-caption__title" data-split="lines" data-split-hero>
+                    Inside the making of <em>Nightform</em>
+                </h1>
+
+                <div class="page-caption__meta" data-reveal="up" data-delay="0.25">
+                    <div class="page-caption__stat"><strong>Studio</strong><span>Category</span></div>
+                    <div class="page-caption__stat"><strong>Mar 04, 2026</strong><span>Published</span></div>
+                    <div class="page-caption__stat"><strong data-count-to="9" data-count-suffix=" min">0</strong><span>Read time</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container-vebra">
+            <div class="content-layout">
+                <article class="article">
+                    <div class="article__hero" data-reveal="mask">
+                        <img src="../assets/images/single-news.jpg" alt="vebra recording in the Catskills barn">
+                    </div>
+
+                    <div class="article__meta">
+                        <span>By Mara Okonkwo</span>
+                        <span>Studio diary</span>
+                        <span>9 min read</span>
+                        <div class="article__share socials socials--bare">
+                            <a href="https://facebook.com/" target="_blank" rel="noopener">Fb</a>
+                            <a href="#">Tw</a>
+                            <a href="#">Ig</a>
+                        </div>
+                    </div>
+
+                    <div class="rich-text has-dropcap">
+                        <p>
+                            The barn came with a leak, a wood stove and a resident barn owl that only ever
+                            appeared during quiet takes. We had booked three weeks upstate to demo four songs
+                            and ended up staying six, tracking an entire album live to two-inch tape with the
+                            doors propped open on whatever weather New York decided to send us.
+                        </p>
+                        <p>
+                            None of that was the plan. The plan was a clean, fast record cut in a proper room
+                            in the city, mixed in a fortnight and out before the summer festivals. What we got
+                            instead was Nightform — slower, stranger, and far more honest about what this band
+                            actually sounds like when nobody is watching the clock.
+                        </p>
+
+                        <h2>Two tape machines, one survivor</h2>
+                        <p>
+                            The Studer arrived on a Tuesday and died on a Thursday. Its replacement, an
+                            unloved MCI hauled up from a basement in Kingston, held together for the rest of
+                            the sessions on a diet of new capacitors and superstition. Every song on the
+                            finished record passed through it, which explains the slight wobble at the top of
+                            &ldquo;Halogen&rdquo; that we decided to keep.
+                        </p>
+                        <p>
+                            Working to tape forces a kind of honesty. There is no comping forty takes into a
+                            perfect one; you play it until the room agrees with you, then you move on. By week
+                            three we were tracking two songs a day and eating dinner outside while the mixes
+                            printed.
+                        </p>
+
+                        <div class="pull-quote" data-reveal="up">
+                            <p>&ldquo;We stopped trying to make it sound expensive and started trying to make it sound true.&rdquo;</p>
+                            <cite>Ivo Lang — guitar, production</cite>
+                        </div>
+
+                        <p>
+                            Sequencing took longer than tracking. Side C exists because of a rainstorm that
+                            arrived halfway through a take and never got edited out; you can hear it under the
+                            second verse if you listen on headphones. We tried removing it four separate times
+                            and the song got worse every time.
+                        </p>
+                        <p>
+                            Nightform is out now on 180g double vinyl, cut at 45rpm from the original tape
+                            transfers. If you come to a show this year, we will be playing most of it front to
+                            back — barn owl not included.
+                        </p>
+                    </div>
+
+                    <div class="article__footer">
+                        <div class="article__tags">
+                            <span class="pill">Nightform</span>
+                            <span class="pill">Studio</span>
+                            <span class="pill">Analog</span>
+                            <span class="pill">Catskills</span>
+                        </div>
+                        <div class="socials">
+                            <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="ri-facebook-fill"></i></a>
+                            <a href="#" aria-label="Share on X"><i class="ri-twitter-x-fill"></i></a>
+                            <a href="#" aria-label="Share on Instagram"><i class="ri-instagram-line"></i></a>
+                            <a href="mailto:hello@vebra.com" aria-label="Share by email"><i class="ri-mail-line"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="sidebar" aria-label="Related information">
+                    <div class="sidebar__block">
+                        <h2 class="sidebar__title">Search</h2>
+                        <form class="form-inline" data-stub-form data-success-message="Search is a front-end stub in this template.">
+                            <input type="search" name="s" placeholder="Search the journal" aria-label="Search the journal" required>
+                            <button type="submit" aria-label="Search"><i class="ri-search-line"></i></button>
+                        </form>
+                        <p class="form-message"></p>
+                    </div>
+
+                    <div class="sidebar__block">
+                        <h2 class="sidebar__title">Categories</h2>
+                        <div class="sidebar__links">
+                            <a href="news-page.html">Studio</a>
+                            <a href="news-page.html">Tour</a>
+                            <a href="news-page.html">Video</a>
+                            <a href="news-page.html">Gear</a>
+                            <a href="news-page.html">Design</a>
+                        </div>
+                    </div>
+
+                    <div class="sidebar__block">
+                        <h2 class="sidebar__title">Recent posts</h2>
+                        <div class="mini-list">
+                            <a href="single-news.html" class="mini-item">
+                                <img src="../assets/images/news-2.jpg" alt="">
+                                <div>
+                                    <h4>The 2026 routing is finally locked</h4>
+                                    <span>Feb 21, 2026</span>
+                                </div>
+                            </a>
+                            <a href="single-news.html" class="mini-item">
+                                <img src="../assets/images/news-3.jpg" alt="">
+                                <div>
+                                    <h4>Shooting &ldquo;Halogen&rdquo; in one take</h4>
+                                    <span>Feb 09, 2026</span>
+                                </div>
+                            </a>
+                            <a href="single-news.html" class="mini-item">
+                                <img src="../assets/images/gallery-5.jpg" alt="">
+                                <div>
+                                    <h4>The modular rig that ate side B</h4>
+                                    <span>Jan 12, 2026</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="comments-block">
+                <div class="section-head">
+                    <div>
+                        <span class="section-label">Comments</span>
+                        <h2 class="section-head__title" data-split="lines">Three <em>replies</em></h2>
+                    </div>
+                </div>
+
+                <div class="comment-list">
+                    <article class="comment">
+                        <div class="comment__avatar"><img src="../assets/images/team-1.jpg" alt=""></div>
+                        <div>
+                            <div class="comment__head">
+                                <h3 class="comment__name">Dana Whitfield</h3>
+                                <span class="comment__date">March 05, 2026</span>
+                                <a href="#" class="comment__reply">Reply</a>
+                            </div>
+                            <p>
+                                The rain under the second verse of side C is the best production decision of the
+                                year. Please never clean it up on a remaster.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="comment comment--reply">
+                        <div class="comment__avatar"><img src="../assets/images/team-2.jpg" alt=""></div>
+                        <div>
+                            <div class="comment__head">
+                                <h3 class="comment__name">Ivo Lang</h3>
+                                <span class="comment__date">March 05, 2026</span>
+                                <a href="#" class="comment__reply">Reply</a>
+                            </div>
+                            <p>
+                                We tried four times, Dana. It always sounded worse. The rain stays.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="comment">
+                        <div class="comment__avatar"><img src="../assets/images/team-3.jpg" alt=""></div>
+                        <div>
+                            <div class="comment__head">
+                                <h3 class="comment__name">Sofia Brandt</h3>
+                                <span class="comment__date">March 07, 2026</span>
+                                <a href="#" class="comment__reply">Reply</a>
+                            </div>
+                            <p>
+                                Saw the Rotterdam show and half of this record live before it came out. Hearing
+                                the tape version now, it makes complete sense why you kept the room in.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="comment-form">
+                    <h2 class="section-head__title" data-split="lines">Write a <em>comment</em></h2>
+
+                    <form data-stub-form data-success-message="Thanks — your comment is in the queue for moderation.">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="field">
+                                    <input type="text" name="name" id="comment-name" class="field__control" placeholder=" " required>
+                                    <label for="comment-name" class="field__label">Your name</label>
+                                    <span class="field__line" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="field">
+                                    <input type="email" name="email" id="comment-email" class="field__control" placeholder=" " required>
+                                    <label for="comment-email" class="field__label">Your email</label>
+                                    <span class="field__line" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="field">
+                                    <textarea name="comment" id="comment-body" class="field__control" placeholder=" " rows="5" required></textarea>
+                                    <label for="comment-body" class="field__label">Comment</label>
+                                    <span class="field__line" aria-hidden="true"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn--solid" data-magnetic="0.3"><span class="btn__label">Post comment <i class="ri-arrow-right-up-line"></i></span></button>
+                        <p class="form-message"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FOOTER
+    ============================================= -->
+    <footer class="site-footer">
+        <div class="site-footer__bg" aria-hidden="true">
+            <img src="../assets/images/footer-image.jpg" alt="">
+        </div>
+        <div class="site-footer__glow" aria-hidden="true"></div>
+
+        <div class="container-vebra">
+            <div class="footer-marquee marquee" data-velocity>
+                <div class="marquee__track">
+                    <span class="marquee__item">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                    <span class="marquee__item marquee__item--ghost" aria-hidden="true">vebra <span class="marquee__sep">✦</span> On tour 2026 <span class="marquee__sep">✦</span> Nightform out now <span class="marquee__sep">✦</span></span>
+                </div>
+            </div>
+
+            <div class="footer-cta">
+                <h2 class="footer-cta__title" data-split="lines">Let&rsquo;s make something <em>loud</em></h2>
+                <a href="mailto:hello@vebra.com" class="btn btn--solid btn--lg" data-magnetic="0.3"><span class="btn__label">hello@vebra.com <i class="ri-arrow-right-up-line"></i></span></a>
+            </div>
+
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <a href="../index.php" class="site-logo"><span class="site-logo__word">vebra<span class="site-logo__dot">.</span></span></a>
+                    <p class="footer-text">A five-piece from Brooklyn making records that sound better loud. Booking and press enquiries welcome.</p>
+                    <div class="socials">
+                        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><i class="ri-facebook-fill"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="ri-twitter-x-fill"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="ri-youtube-fill"></i></a>
+                        <a href="#" aria-label="Spotify"><i class="ri-spotify-fill"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Explore</h3>
+                    <div class="footer-links">
+                        <a href="discography.html">Discography</a>
+                        <a href="events.html">Events</a>
+                        <a href="gallery.html">Gallery</a>
+                        <a href="video-gallery.html">Videos</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">More</h3>
+                    <div class="footer-links">
+                        <a href="shop-page.html">Shop</a>
+                        <a href="news-page.html">News</a>
+                        <a href="artists.html">Artists</a>
+                        <a href="contact.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-col__title">Newsletter</h3>
+                    <p class="footer-text">Tour dates and releases, no noise.</p>
+                    <form class="form-inline footer-newsletter" data-stub-form data-success-message="You're on the list — see you at the next show.">
+                        <input type="email" name="email" placeholder="Your email" aria-label="Your email" required>
+                        <button type="submit" aria-label="Subscribe"><i class="ri-arrow-right-line"></i></button>
+                    </form>
+                    <p class="form-message"></p>
+                </div>
+            </div>
+
+            <div class="footer-wordmark-wrap">
+                <a href="../index.php" class="footer-wordmark" aria-hidden="true" tabindex="-1">vebra</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 vebra Band — All rights reserved.</p>
+                <div class="footer-bottom__links">
+                    <a href="typography.html">Typography</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Licence</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+
+    <!-- SCRIPTS -->
+    <script src="../assets/js/vendor/gsap.min.js"></script>
+    <script src="../assets/js/vendor/ScrollTrigger.min.js"></script>
+    <script src="../assets/js/vendor/SplitText.min.js"></script>
+    <script src="../assets/js/vendor/lenis.min.js"></script>
+    <script src="../assets/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>
